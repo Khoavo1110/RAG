@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
+import traceback
 
 from backend.app.config import settings
 from backend.app.ingestion.database_sync import init_db, get_db, db_sync_manager
@@ -90,6 +91,7 @@ async def ingest_document(doc_in: DocumentCreate, db: Session = Depends(get_db))
             created_at=doc.created_at
         )
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to ingest document: {str(e)}"
@@ -143,6 +145,7 @@ async def query_agentic_rag(req: QueryRequest, db: Session = Depends(get_db)):
             thought_process=result.get("thought_process", [])
         )
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Agent loop execution failed: {str(e)}"
