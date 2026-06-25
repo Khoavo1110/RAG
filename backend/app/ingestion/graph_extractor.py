@@ -2,11 +2,11 @@ import datetime
 from graphiti_core import Graphiti
 from graphiti_core.llm_client import LLMConfig
 from graphiti_core.llm_client.openai_generic_client import OpenAIGenericClient
-from graphiti_core.embedder import OpenAIEmbedder, OpenAIEmbedderConfig
+from graphiti_core.embedder import OpenAIEmbedder, OpenAIEmbedderConfig, EmbedderClient
 from openai import AsyncOpenAI
 from backend.app.config import settings
 
-class GeminiGraphitiEmbedder:
+class GeminiGraphitiEmbedder(EmbedderClient):
     def __init__(self, api_key: str):
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
         self.embeddings = GoogleGenerativeAIEmbeddings(
@@ -20,9 +20,16 @@ class GeminiGraphitiEmbedder:
             
         self.config = MockConfig()
 
-    async def create_batch(self, texts: list[str]) -> list[list[float]]:
+    async def create(self, input_data) -> list[float]:
+        if isinstance(input_data, list):
+            res = await self.embeddings.aembed_documents(input_data)
+            return res[0]
+        res = await self.embeddings.aembed_query(str(input_data))
+        return res
+
+    async def create_batch(self, input_data_list: list[str]) -> list[list[float]]:
         # langchain embeddings.aembed_documents returns async
-        return await self.embeddings.aembed_documents(texts)
+        return await self.embeddings.aembed_documents(input_data_list)
 
 class GraphExtractor:
     def __init__(self):

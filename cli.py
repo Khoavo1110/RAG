@@ -9,6 +9,12 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR))
 
+# Fix Windows console UTF-8 encoding for Vietnamese characters
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
+
 # Load env variables into system environment
 load_dotenv(BASE_DIR / ".env")
 
