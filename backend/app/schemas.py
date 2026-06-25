@@ -28,8 +28,8 @@ class DocumentChunk(Base):
     content = Column(Text, nullable=False)
     chunk_index = Column(Integer, nullable=False)
     
-    # Vector column. text-embedding-3-small has 1536 dimensions
-    embedding = Column(Vector(1536), nullable=False)
+    # Vector column. text-embedding-004 has 768 dimensions
+    embedding = Column(Vector(768), nullable=False)
 
     document = relationship("Document", back_populates="chunks")
 

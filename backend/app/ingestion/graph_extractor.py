@@ -6,6 +6,24 @@ from graphiti_core.embedder import OpenAIEmbedder, OpenAIEmbedderConfig
 from openai import AsyncOpenAI
 from backend.app.config import settings
 
+class GeminiGraphitiEmbedder:
+    def __init__(self, api_key: str):
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        self.embeddings = GoogleGenerativeAIEmbeddings(
+            model="models/text-embedding-004",
+            google_api_key=api_key
+        )
+        
+        class MockConfig:
+            embedding_dim = 768
+            embedding_model = "models/text-embedding-004"
+            
+        self.config = MockConfig()
+
+    async def create_batch(self, texts: list[str]) -> list[list[float]]:
+        # langchain embeddings.aembed_documents returns async
+        return await self.embeddings.aembed_documents(texts)
+
 class GraphExtractor:
     def __init__(self):
         # Create a single shared OpenAI client with high retry count (max_retries=12)
@@ -31,17 +49,8 @@ class GraphExtractor:
             structured_output_mode="json_object"
         )
         
-        # 2. Configure OpenAIEmbedder (GitHub Models) for 1536-dimension embeddings
-        self.embedder_config = OpenAIEmbedderConfig(
-            api_key=settings.OPENAI_API_KEY,
-            base_url="https://models.inference.ai.azure.com",
-            embedding_model="text-embedding-3-small",
-            embedding_dim=1536
-        )
-        self.embedder = OpenAIEmbedder(
-            config=self.embedder_config,
-            client=self.shared_client
-        )
+        # 2. Configure GeminiEmbedder for 768-dimension embeddings
+        self.embedder = GeminiGraphitiEmbedder(api_key=settings.GEMINI_API_KEY)
         
         # 3. Setup Graphiti Instance
         self.graphiti = Graphiti(

@@ -1,5 +1,5 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from backend.app.config import settings
 
 class DocumentChunker:
@@ -9,10 +9,9 @@ class DocumentChunker:
             chunk_overlap=chunk_overlap,
             length_function=len
         )
-        self.embeddings = OpenAIEmbeddings(
-            model="text-embedding-3-small",
-            openai_api_key=settings.OPENAI_API_KEY,
-            openai_api_base="https://models.inference.ai.azure.com"
+        self.embeddings = GoogleGenerativeAIEmbeddings(
+            model="models/text-embedding-004",
+            google_api_key=settings.GEMINI_API_KEY
         )
 
     def split_text(self, text: str) -> list[str]:
