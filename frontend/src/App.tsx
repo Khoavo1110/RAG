@@ -3,6 +3,8 @@ import { GraphVisualizer } from './components/GraphVisualizer';
 import { ChatWindow } from './components/ChatWindow';
 import { ThoughtProcess } from './components/ThoughtProcess';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 interface Message {
   role: 'user' | 'assistant';
   text: string;
@@ -78,7 +80,7 @@ export default function App() {
 
       try {
         setIngestStatus(`Đang tải lên hệ thống...`);
-        const response = await fetch('http://localhost:8000/api/ingest', {
+        const response = await fetch(`${API_BASE_URL}/api/ingest`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -128,7 +130,7 @@ export default function App() {
     const startTime = performance.now();
 
     try {
-      const response = await fetch('http://localhost:8000/api/query', {
+      const response = await fetch(`${API_BASE_URL}/api/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
