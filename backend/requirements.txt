@@ -1,0 +1,29 @@
+# Web Framework
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# LLM & Agents
+langchain
+langgraph
+langchain-openai # Vẫn cần để dùng OpenRouter (do API tương thích với OpenAI)
+langchain-google-genai # Để dùng thẳng Gemini API
+langchain-community
+
+# Vector DB
+psycopg2-binary
+pgvector
+sqlalchemy
+
+# Graph DB
+neo4j
+graphiti-core
+
+# Evaluation & Observability
+langfuse
+ragas
+
+# Queue & Memory
+redis
+celery

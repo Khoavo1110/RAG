@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #081425;
+  --color-surface: #081425;
+  --color-surface-container-lowest: #040e1f;
+  --color-surface-container-low: #111c2d;
+  --color-surface-container: #152031;
+  --color-surface-container-high: #1f2a3c;
+  --color-surface-container-highest: #2a3548;
+  --color-primary: #bec6e0;
+  --color-secondary: #5de6ff;
+  --color-tertiary: #4edea3;
+  --color-on-surface: #d8e3fb;
+  --color-on-surface-variant: #c6c6cd;
+  --color-on-secondary: #00363e;
+  --color-on-tertiary-container: #009365;
+  --color-inverse-primary: #565e74;
+  --color-error: #ffb4ab;
+
+  --font-sans: "Inter", sans-serif;
+  --font-geist: "Geist", sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  overflow: hidden;
+}
+
+.glass-panel {
+  background: rgba(21, 32, 49, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cyan-glow {
+  box-shadow: 0 0 15px -3px rgba(93, 230, 255, 0.3);
+}
+
+.emerald-glow {
+  box-shadow: 0 0 15px -3px rgba(78, 222, 163, 0.3);
+}
+
+.chat-input-container {
+  box-shadow: 0 0 40px rgba(93, 230, 255, 0.1);
+}
+
+.source-chip {
+  border: 1px solid rgba(78, 222, 163, 0.4);
+  background: rgba(78, 222, 163, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(93, 230, 255, 0.2);
+  border-radius: 10px;
+}
