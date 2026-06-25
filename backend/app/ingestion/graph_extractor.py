@@ -10,13 +10,13 @@ class GeminiGraphitiEmbedder(EmbedderClient):
     def __init__(self, api_key: str):
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
         self.embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/text-embedding-004",
+            model="gemini-embedding-2",
             google_api_key=api_key
         )
         
         class MockConfig:
-            embedding_dim = 768
-            embedding_model = "models/text-embedding-004"
+            embedding_dim = 3072
+            embedding_model = "gemini-embedding-2"
             
         self.config = MockConfig()
 

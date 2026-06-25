@@ -28,8 +28,8 @@ class DocumentChunk(Base):
     content = Column(Text, nullable=False)
     chunk_index = Column(Integer, nullable=False)
     
-    # Vector column. text-embedding-004 has 768 dimensions
-    embedding = Column(Vector(768), nullable=False)
+    # Vector column. gemini-embedding-2 has 3072 dimensions
+    embedding = Column(Vector(3072), nullable=False)
 
     document = relationship("Document", back_populates="chunks")
 

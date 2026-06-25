@@ -10,7 +10,7 @@ class DocumentChunker:
             length_function=len
         )
         self.embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/text-embedding-004",
+            model="gemini-embedding-2",
             google_api_key=settings.GEMINI_API_KEY
         )
 
