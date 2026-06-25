@@ -1,8 +1,12 @@
 from pathlib import Path
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Base directory is the project root (contains .env)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Load environment variables into OS environment (for libraries like graphiti-core)
+load_dotenv(BASE_DIR / ".env")
 
 class Settings(BaseSettings):
     # Postgres
