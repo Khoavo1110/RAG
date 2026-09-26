@@ -7,6 +7,7 @@ def setup(monkeypatch, verdicts):
     source = {"title": "Acceptance", "document_id": "missing-test-doc", "content": "Failover must not exceed 60 seconds.", "source_type": "text"}
     monkeypatch.setattr(router, "lexical_search", lambda *a: [source])
     monkeypatch.setattr(router, "vector_search", lambda *a: [])
+    monkeypatch.setattr(router, "expand_evidence", lambda q,t,r,f: r)
     monkeypatch.setattr(router, "complete", AsyncMock(return_value="Failover exceeds 60 seconds [1]"))
     verifier = AsyncMock(side_effect=verdicts)
     monkeypatch.setattr(router, "verify_answer", verifier)
@@ -61,3 +62,17 @@ def test_citation_indices_are_validated():
     assert check("Supported [1]",1)
     assert not check("Unsupported [9]",1)
     assert not check("Uncited answer",1)
+
+
+def test_malformed_verifier_is_unknown(monkeypatch):
+    import backend.app.agents.critic as critic
+    monkeypatch.setattr(critic, "complete", AsyncMock(return_value='{"is_valid":"true","feedback":"ok"}'))
+    verdict, _ = asyncio.run(critic.verify_answer("question","[1] Evidence","Answer [1]"))
+    assert verdict is None
+
+
+def test_verifier_rejects_unsupported_claim(monkeypatch):
+    import backend.app.agents.critic as critic
+    monkeypatch.setattr(critic,"complete",AsyncMock(return_value='{"is_valid":true,"complete":true,"claims":[{"supported":false,"source_ids":[1]}],"feedback":"Wrong threshold"}'))
+    verdict, _ = asyncio.run(critic.verify_answer("question","[1] Evidence","Answer [1]"))
+    assert verdict is False
