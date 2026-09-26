@@ -50,10 +50,11 @@ def test_document_reference_expansion(monkeypatch):
 def test_followup_uses_previous_question():
     make_query = getattr(router,"retrieval_query",None)
     assert callable(make_query), "Context-aware retrieval is missing"
-    history = [{"role":"user","content":"Ai giao b?n t?ch h?p cho Atlas?"},{"role":"assistant","content":"Ho?ng Nam [1]"}]
-    assert "Atlas" in make_query("Ng??i ?? l?m cho c?ng ty n?o?", history)
-    assert "Ho?ng Nam" in make_query("Ng??i ?? l?m cho c?ng ty n?o?", history)
-    assert make_query("Ng?n s?ch Lantern?",history) == "Ng?n s?ch Lantern?"
+    history = [{"role":"user","content":"Ai giao bản tích hợp cho Atlas?"},{"role":"assistant","content":"Hoàng Nam [1]"}]
+    assert "Atlas" in make_query("Người đó làm cho công ty nào?", history)
+    assert "Hoàng Nam" in make_query("Người đó làm cho công ty nào?", history)
+    assert make_query("Ngân sách Lantern?",history) == "Ngân sách Lantern?"
+
 
 
 def test_citation_indices_are_validated():
@@ -76,3 +77,13 @@ def test_verifier_rejects_unsupported_claim(monkeypatch):
     monkeypatch.setattr(critic,"complete",AsyncMock(return_value='{"is_valid":true,"complete":true,"claims":[{"supported":false,"source_ids":[1]}],"feedback":"Wrong threshold"}'))
     verdict, _ = asyncio.run(critic.verify_answer("question","[1] Evidence","Answer [1]"))
     assert verdict is False
+
+
+def test_inverse_references_are_retrieved(monkeypatch):
+    from types import SimpleNamespace
+    import backend.app.agents.tools as tools
+    docs=[SimpleNamespace(id="contract",title="CON-X-01",content="Contract",metadata_json={}),
+          SimpleNamespace(id="policy",title="POL-X-01",content="# POL-X-01\n\nPayment policy applies to CON-X-01.",metadata_json={})]
+    monkeypatch.setattr(tools,"scoped_documents",lambda tenant:docs)
+    found=tools.expand_evidence("CON-X-01 payment", "tenant", [{"document_id":"contract"}], [])
+    assert "policy" in {s["document_id"] for s in found}
