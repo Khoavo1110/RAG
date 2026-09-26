@@ -215,3 +215,38 @@ def test_structured_generation_requires_exact_quotes():
     sources=[{"content":"Finance approves payment.","title":"Policy"}]
     assert render('{"claims":[{"quote":"Finance approves payment.","source_id":1,"text":"Finance approves payment."}]}',sources) == "Finance approves payment. [1]"
     assert not render('{"claims":[{"quote":"Vendor approves payment.","source_id":1,"text":"Vendor approves payment."}]}',sources)
+
+
+def test_unknown_organization_acronyms_do_not_use_unrelated_sources(monkeypatch):
+    from types import SimpleNamespace
+    import backend.app.agents.tools as tools
+    docs=[SimpleNamespace(id="local",title="Budget",content="Atlas has a procurement budget.",metadata_json={})]
+    monkeypatch.setattr(tools,"scoped_documents",lambda tenant:docs)
+    assert not tools.expand_evidence("FPT buys GPU from NVIDIA", "tenant", [{"document_id":"local"}], [])
+
+
+@pytest.mark.parametrize("provider",["gemini","openrouter","github_models","openai"])
+def test_provider_configuration_still_supported(monkeypatch,provider):
+    import backend.app.agents.critic as critic
+    monkeypatch.setattr(critic.settings,"LLM_PROVIDER",provider)
+    assert len(critic.provider_config()) == 3
+
+
+def test_unknown_provider_is_rejected(monkeypatch):
+    import backend.app.agents.critic as critic
+    monkeypatch.setattr(critic.settings,"LLM_PROVIDER","invalid")
+    with pytest.raises(RuntimeError):critic.provider_config()
+
+
+def test_ollama_json_mode_and_empty_answer(monkeypatch):
+    import httpx
+    import backend.app.agents.critic as critic
+    original=httpx.AsyncClient
+    captured=[]
+    def handler(request):
+        captured.append(json.loads(request.content))
+        return httpx.Response(200,json={"message":{"content":" "}})
+    monkeypatch.setattr(critic.settings,"LLM_PROVIDER","ollama")
+    monkeypatch.setattr(httpx,"AsyncClient",lambda **kwargs:original(transport=httpx.MockTransport(handler),**kwargs))
+    with pytest.raises(RuntimeError):asyncio.run(critic.complete([{"role":"user","content":"question"}],json_mode=True))
+    assert captured[0]["format"] == "json"
