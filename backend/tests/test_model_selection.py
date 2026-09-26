@@ -139,3 +139,14 @@ def test_grounding_preserves_actor_action():
     sources=[{'content':'An Bình hoàn thiện hồ sơ; Mai Lan phê duyệt chi tiền.'}]
     raw=json.dumps({'claims':[{'source_id':1,'quote':sources[0]['content'],'text':'Mai Lan đề nghị chi tiền.'}]},ensure_ascii=False)
     assert render_grounded_answer(raw,sources) is None
+
+
+def test_shared_ingestion_ignores_request_model_selection():
+    default_config=getattr(critic,'default_provider_config',None)
+    assert callable(default_config), 'Shared ingestion must use the default provider separately'
+    from backend.app.models import ModelProfile
+    token=critic.selected_profile.set(ModelProfile('gemini','cloud','https://example.test/v1','fake-secret'))
+    try:
+        assert critic.provider_config()[2]=='cloud'
+        assert default_config()[2]==critic.settings.OLLAMA_MODEL
+    finally:critic.selected_profile.reset(token)
