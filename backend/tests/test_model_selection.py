@@ -122,3 +122,19 @@ def test_provider_failure_is_reported_without_leaking_details(monkeypatch):
     result=asyncio.run(router.AgenticRAG().ainvoke({'query':'question','route':'documents'}))
     assert '429' in result.get('failure_reason','')
     assert 'private-key-do-not-show' not in str(result)
+
+
+def test_grounding_preserves_inclusive_threshold():
+    from backend.app.agents.router import render_grounded_answer
+    import json
+    sources=[{'content':'Điều kiện là failover không quá 60 giây.'}]
+    raw=json.dumps({'claims':[{'source_id':1,'quote':sources[0]['content'],'text':'Failover phải dưới 60 giây.'}]},ensure_ascii=False)
+    assert render_grounded_answer(raw,sources) is None
+
+
+def test_grounding_preserves_actor_action():
+    from backend.app.agents.router import render_grounded_answer
+    import json
+    sources=[{'content':'An Bình hoàn thiện hồ sơ; Mai Lan phê duyệt chi tiền.'}]
+    raw=json.dumps({'claims':[{'source_id':1,'quote':sources[0]['content'],'text':'Mai Lan đề nghị chi tiền.'}]},ensure_ascii=False)
+    assert render_grounded_answer(raw,sources) is None
