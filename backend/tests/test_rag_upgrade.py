@@ -207,3 +207,11 @@ def test_failed_repair_falls_back(monkeypatch):
     monkeypatch.setattr(router,"complete",AsyncMock(side_effect=["Draft [1]",TimeoutError()]))
     result=asyncio.run(router.AgenticRAG().ainvoke({"query":"question","route":"documents"}))
     assert result["answer_mode"] == "extractive"
+
+
+def test_structured_generation_requires_exact_quotes():
+    render=getattr(router,"render_grounded_answer",None)
+    assert callable(render), "Structured generation is missing"
+    sources=[{"content":"Finance approves payment.","title":"Policy"}]
+    assert render('{"claims":[{"quote":"Finance approves payment.","source_id":1,"text":"Finance approves payment."}]}',sources) == "Finance approves payment. [1]"
+    assert not render('{"claims":[{"quote":"Vendor approves payment.","source_id":1,"text":"Vendor approves payment."}]}',sources)
