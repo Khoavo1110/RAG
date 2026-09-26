@@ -250,3 +250,10 @@ def test_ollama_json_mode_and_empty_answer(monkeypatch):
     monkeypatch.setattr(httpx,"AsyncClient",lambda **kwargs:original(transport=httpx.MockTransport(handler),**kwargs))
     with pytest.raises(RuntimeError):asyncio.run(critic.complete([{"role":"user","content":"question"}],json_mode=True))
     assert captured[0]["format"] == "json"
+
+
+def test_fallback_keeps_all_conditions_in_primary_source():
+    source={"title":"Invoice","content":"Payment is blocked by acceptance.\nEngineer sends repair. Operator retests. Finance approves.\nFailover must not exceed 60 seconds."}
+    answer=router.extractive_answer([source],"Why is payment blocked?")
+    assert "Engineer sends repair." in answer
+    assert "Failover must not exceed 60 seconds." in answer
