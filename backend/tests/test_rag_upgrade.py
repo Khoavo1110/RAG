@@ -87,3 +87,18 @@ def test_inverse_references_are_retrieved(monkeypatch):
     monkeypatch.setattr(tools,"scoped_documents",lambda tenant:docs)
     found=tools.expand_evidence("CON-X-01 payment", "tenant", [{"document_id":"contract"}], [])
     assert "policy" in {s["document_id"] for s in found}
+
+
+def test_ollama_context_is_explicit(monkeypatch):
+    import httpx
+    import backend.app.agents.critic as critic
+    original=httpx.AsyncClient
+    captured=[]
+    def handler(request):
+        import json
+        payload=json.loads(request.content);captured.append(payload)
+        return httpx.Response(200,json={"message":{"content":"Supported [1]"}})
+    monkeypatch.setattr(critic.settings,"LLM_PROVIDER","ollama")
+    monkeypatch.setattr(httpx,"AsyncClient",lambda **kwargs:original(transport=httpx.MockTransport(handler),**kwargs))
+    assert asyncio.run(critic.complete([{"role":"user","content":"question"}])) == "Supported [1]"
+    assert captured[0]["options"]["num_ctx"] >= 16384
