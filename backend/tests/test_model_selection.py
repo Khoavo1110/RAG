@@ -110,6 +110,7 @@ def test_cloud_completion_uses_selected_provider(monkeypatch):
     assert clients[0]['base_url']=='https://example.test/v1'
     assert create.call_args.kwargs['model']=='selected-model'
     assert create.call_args.kwargs['response_format']=={'type':'json_object'}
+    assert create.call_args.kwargs['reasoning_effort']=='low'
 
 
 def test_provider_failure_is_reported_without_leaking_details(monkeypatch):
