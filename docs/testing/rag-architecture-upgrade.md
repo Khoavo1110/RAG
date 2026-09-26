@@ -76,8 +76,15 @@ Kiểm chứng LLM và quote nguyên văn không phải chứng minh hình thứ
 
 Bộ chạy ứng viên gồm 20 câu, dùng nguyên qwen2.5:3b và truy xuất chế độ documents. Kết quả: 0/20 bản tổng hợp đạt kiểm chứng, 20/20 chuyển bằng chứng gốc. Đây là kết quả chưa đạt yêu cầu tổng hợp; không gọi 20 phản hồi nguyên văn là 20 câu trả lời đúng. Snapshot này chạy trước các chỉnh sửa cuối về hạn thời gian, chặn bỏ qua quote, trình bày nguyên văn và từ chối thực thể viết tắt ngoài dữ liệu; kiểm tra API cuối ở `final-api-check.json` xác nhận phiên bản đang phục vụ app.
 
-Trong 18 câu độc lập có danh sách nguồn đối chiếu, bộ đo văn bản + tham chiếu tăng tỷ lệ tìm đủ nguồn trung bình từ 75% lên 96,76%. T03/T06 đều lấy đủ bốn/ba nhóm nguồn yêu cầu tương ứng theo danh sách. T15 và T17 vẫn thiếu một nguồn đối chiếu. Chỉ số này không phải độ chính xác câu trả lời, không đo tác dụng riêng của RRF/vector, và ngân sách đã tăng từ sáu đoạn lên tối đa 12 tài liệu nên không phải so sánh cùng chi phí. Không đánh giá recall của T19 (cần từ chối) và T20 (hội thoại nhiều lượt) như câu độc lập.
+Trong 18 câu độc lập có danh sách nguồn đối chiếu, bộ đo văn bản + tham chiếu tăng tỷ lệ tìm đủ nguồn trung bình từ 75% lên 96,76%. T03/T06 đều lấy đủ ba/bốn nhóm nguồn yêu cầu tương ứng theo danh sách. T15 và T17 vẫn thiếu một nguồn đối chiếu. Chỉ số này không phải độ chính xác câu trả lời, không đo tác dụng riêng của RRF/vector, và ngân sách đã tăng từ sáu đoạn lên tối đa 12 tài liệu nên không phải so sánh cùng chi phí. Không đánh giá recall của T19 (cần từ chối) và T20 (hội thoại nhiều lượt) như câu độc lập.
 
 T19 kiểm tra API cuối: HTTP 200, không nguồn, nói thiếu thông tin, không trả 200 triệu; hội thoại lưu hai tin nhắn, không gian khác nhận 404, đã xóa hội thoại thử. Sức khỏe API thật: PostgreSQL, Neo4j, Ollama đều healthy; 22 tài liệu Minh An và một tài liệu FPT không trùng ID. CLI `--help` chạy được; không tuyên bố đã đánh giá chất lượng chế độ chat CLI vì CLI chưa lưu ngữ cảnh như API.
 
 Quyết định: đưa các thay đổi truy xuất/kiểm soát sai vào backend; giữ mô hình và phản hồi dự phòng minh bạch. Không kết luận chất lượng tổng hợp đã đạt. Bước tiếp theo về chất lượng cần so sánh mô hình/hợp đồng sinh trên bộ kiểm tra riêng và tài liệu chưa dùng điều chỉnh, đồng thời giảm lượng ngữ cảnh không liên quan.
+
+
+## Xác nhận bản đang chạy
+
+GREEN commit: `28f716a` trên main, sau các mốc RED cùng nhánh. API cổng 8000 đã được khởi động lại bằng .venv của D:/RAG, giữ frontend cổng 5173. HTTP 200/healthy cho PostgreSQL, Neo4j và Ollama.
+
+Ba kiểm tra trực tiếp trên bản cuối: T03 HTTP 200 trong 23,31 giây, T06 HTTP 200 trong 79 giây, T19 HTTP 200 trong 1,47 giây. T03/T06 dùng nguyên văn bằng chứng, không phải bản tổng hợp được kiểm chứng thành công; phản hồi có dữ kiện nhà cung cấp/số tiền/người duyệt và năm người/điều kiện failover không quá 60 giây. T19 không nguồn, không trả số liệu FPT. Hội thoại kiểm tra đã được xóa sau khi lưu kết quả vào artifact. Frontend HTTP 200. Người dùng vẫn cần nghiệm thu phản hồi dự phòng dài và các câu ngoài bộ thử.
