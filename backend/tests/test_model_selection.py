@@ -110,3 +110,15 @@ def test_cloud_completion_uses_selected_provider(monkeypatch):
     assert clients[0]['base_url']=='https://example.test/v1'
     assert create.call_args.kwargs['model']=='selected-model'
     assert create.call_args.kwargs['response_format']=={'type':'json_object'}
+
+
+def test_provider_failure_is_reported_without_leaking_details(monkeypatch):
+    import backend.app.agents.router as router
+    class ApiFailure(RuntimeError):status_code=429
+    monkeypatch.setattr(router,'lexical_search',lambda *a:[{'document_id':'1','title':'Test','content':'Evidence'}])
+    monkeypatch.setattr(router,'vector_search',lambda *a:[])
+    monkeypatch.setattr(router,'expand_evidence',lambda q,t,r,f:r)
+    monkeypatch.setattr(router,'complete',AsyncMock(side_effect=ApiFailure('private-key-do-not-show')))
+    result=asyncio.run(router.AgenticRAG().ainvoke({'query':'question','route':'documents'}))
+    assert '429' in result.get('failure_reason','')
+    assert 'private-key-do-not-show' not in str(result)
