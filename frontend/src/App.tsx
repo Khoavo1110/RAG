@@ -1,405 +1,174 @@
-import React, { useState, useRef } from 'react';
-import { GraphVisualizer } from './components/GraphVisualizer';
-import { ChatWindow } from './components/ChatWindow';
-import { ThoughtProcess } from './components/ThoughtProcess';
+import { useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
+import { ArrowUp, ArrowUpRight, BookOpen, Check, ChevronDown, ChevronRight, Copy, FileText, FolderOpen, Leaf, LoaderCircle, Menu, MessageSquare, Moon, PanelLeftClose, Paperclip, Plus, Search, Settings2, Sparkles, Sun, Trash2, Upload, X } from 'lucide-react';
+import { request, workspace } from './api';
+import type { Conversation, Document, Health, Message, Source, ModelCatalog } from './types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-
-interface Message {
-  role: 'user' | 'assistant';
-  text: string;
-  sources?: any[];
-  latency?: number;
+function Mark({ small = false }: { small?: boolean }) {
+  return <svg className={small ? 'mark small' : 'mark'} viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 31C12 34 8 14 18 10c11-5 15 9 14 21Z" fill="currentColor"/><path d="M33 31c-3-20 17-24 21-14 5 11-9 15-21 14Z" fill="currentColor" opacity=".8"/><path d="M33 33c20-3 24 17 14 21-11 5-15-9-14-21Z" fill="currentColor" opacity=".65"/><path d="M31 33c3 20-17 24-21 14-5-11 9-15 21-14Z" fill="currentColor" opacity=".9"/></svg>;
 }
-
+function Dialog({ title, children, close }: { title: string; children: ReactNode; close: () => void }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => { const d = ref.current; d?.showModal(); return () => d?.close(); }, []);
+  return <dialog ref={ref} onCancel={close} onClick={e => { if (e.target === e.currentTarget) close(); }}><div className="dialog-inner"><header><h2>{title}</h2><button className="icon" onClick={close} aria-label="Đóng"><X size={20}/></button></header>{children}</div></dialog>;
+}
+function RichText({ text, onSource }: { text: string; onSource: () => void }) {
+  const inline = (line: string) => line.split(/(\*\*.*?\*\*|`[^`]+`|\[\d+\])/g).map((part, i) => part.startsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part.startsWith('`') ? <code key={i}>{part.slice(1, -1)}</code> : /^\[\d+\]$/.test(part) ? <button key={i} className="citation" onClick={onSource} aria-label={`Xem nguồn ${part}`}>{part.slice(1, -1)}</button> : part);
+  return <div className="rich-text">{text.split(/(```[\s\S]*?```)/g).map((block, i) => block.startsWith('```') ? <pre key={i}><code>{block.slice(3, -3).replace(/^\w*\n/, '')}</code></pre> : block.split('\n').map((line, j) => /^#{1,4} /.test(line) ? <h3 key={`${i}-${j}`}>{inline(line.replace(/^#+ /, ''))}</h3> : /^[-*] /.test(line) ? <div className="bullet" key={`${i}-${j}`}><span>•</span><div>{inline(line.slice(2))}</div></div> : <p key={`${i}-${j}`}>{line ? inline(line) : <br/>}</p>))}</div>;
+}
+const safeTheme = () => { try { return localStorage.getItem('nori-theme') === 'dark'; } catch { return false; } };
+const safeWorkspace = () => { try { return localStorage.getItem('nori-workspace') ?? 'minh_an_demo'; } catch { return 'minh_an_demo'; } };
+const workspaceName = (id: string) => id === 'minh_an_demo' ? 'Minh An Supply' : id || 'Không gian chung';
+const safeModelProfile = () => { try { return localStorage.getItem('nori-model-profile') || ''; } catch { return ''; } };
 export default function App() {
-  const [selectedTenant, setSelectedTenant] = useState('tenant_fpt_001');
-  const [tenantDisplayName, setTenantDisplayName] = useState('FPT Corporate (tenant_fpt_001)');
-  const [isTenantDropdownOpen, setIsTenantDropdownOpen] = useState(false);
-  
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      text: 'Xin chào! Tôi là Trợ lý Aetheris RAG 2.0. Tôi có thể truy xuất thông tin từ tài liệu thông thường và đồ thị thực thể Neo4j của bạn để đưa ra các câu trả lời chính xác, được kiểm chứng bởi Critic Agent.'
-    }
-  ]);
-  const [thoughts, setThoughts] = useState<string[]>([]);
-  const [graphSources, setGraphSources] = useState<any[]>([]);
-  const [isQuerying, setIsQuerying] = useState(false);
-  const [latency, setLatency] = useState<string | number>('--');
-  
-  const [isIngesting, setIsIngesting] = useState(false);
-  const [ingestStatus, setIngestStatus] = useState<string | null>(null);
-  const [ingestError, setIngestError] = useState<string | null>(null);
+  const [dark, setDark] = useState(safeTheme);
+  const [mobile, setMobile] = useState(false);
+  const [view, setView] = useState<'chat' | 'library'>('chat');
+  const [tenant, setTenant] = useState(safeWorkspace);
+  const [tenants, setTenants] = useState<(string | null)[]>([null]);
+  const [modelCatalog, setModelCatalog] = useState<ModelCatalog | null>(null);
+  const [modelProfile, setModelProfile] = useState(safeModelProfile);
+  const lastModelProfiles = useRef({ local: '', api: '' });
+  const selectedModel = modelCatalog?.profiles.find(p => p.id === modelProfile);
+  const executionMode = selectedModel?.mode || 'api';
+  const [health, setHealth] = useState<Health | null>(null);
+  const [docs, setDocs] = useState<Document[]>([]);
+  const [chats, setChats] = useState<Conversation[]>([]);
+  const [active, setActive] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [draft, setDraft] = useState('');
+  const [search, setSearch] = useState('');
+  const [mode, setMode] = useState('hybrid');
+  const [busy, setBusy] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [settings, setSettings] = useState(false);
+  const [sourceMessage, setSourceMessage] = useState<Message | null>(null);
+  const [preview, setPreview] = useState<Document | null>(null);
+  const [confirm, setConfirm] = useState<{ kind: 'document' | 'chat'; id: string; title: string } | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
+  const file = useRef<HTMLInputElement>(null);
+  const input = useRef<HTMLTextAreaElement>(null);
+  const bottom = useRef<HTMLDivElement>(null);
+  const generation = useRef(0);
+  const sendLock = useRef(false);
+  const pending = busy || uploading || loading;
 
-  // Graph details
-  const [hoveredNode, setHoveredNode] = useState<{ name: string; type: string; fact: string } | null>(null);
-  const [stats, setStats] = useState({ nodes: 0, edges: 0 });
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Handle Tenant selection
-  const handleTenantSelect = (tenantId: string, displayName: string) => {
-    setSelectedTenant(tenantId);
-    setTenantDisplayName(displayName);
-    setIsTenantDropdownOpen(false);
-    // Clear chat history on tenant switch to maintain absolute security isolation
-    setMessages([
-      {
-        role: 'assistant',
-        text: `Đã chuyển sang môi trường **${displayName}**. Lịch sử hội thoại đã được làm mới để đảm bảo cách ly bảo mật.`
-      }
-    ]);
-    setThoughts([]);
-    setGraphSources([]);
-  };
-
-  const handleCustomTenant = () => {
-    const customId = prompt("Nhập Tenant ID của bạn:");
-    if (customId && customId.trim()) {
-      handleTenantSelect(customId.trim(), `Custom Workspace (${customId.trim()})`);
-    }
-    setIsTenantDropdownOpen(false);
-  };
-
-  // Document Ingestion API trigger
-  const handleFileUpload = async (file: File) => {
-    if (isIngesting) return;
-    setIsIngesting(true);
-    setIngestStatus(`Đang đọc tệp ${file.name}...`);
-    setIngestError(null);
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const text = e.target?.result as string;
-      if (!text) {
-        setIngestError("Không thể đọc tệp văn bản hoặc tệp rỗng.");
-        setIsIngesting(false);
-        return;
-      }
-
-      try {
-        setIngestStatus(`Đang tải lên hệ thống...`);
-        const response = await fetch(`${API_BASE_URL}/api/ingest`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: file.name,
-            content: text,
-            metadata: { tenant_id: selectedTenant }
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`API response error: ${response.statusText}`);
+  useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; try { localStorage.setItem('nori-theme', dark ? 'dark' : 'light'); } catch { /* Storage may be disabled. */ } }, [dark]);
+  useEffect(() => {
+    let alive = true;
+    const check = () => request<Health>('/api/health').then(v => { if (alive) setHealth(v); }).catch(() => { if (alive) setHealth(null); });
+    request<ModelCatalog>('/api/models').then(catalog => {
+      if (!alive) return;
+      setModelCatalog(catalog);
+      setModelProfile(current => {
+        const valid = catalog.profiles.some(p => p.id === current && p.configured && p.available !== false);
+        const next = valid ? current : catalog.api_default_id || catalog.local_default_id;
+        for (const modeName of ['local', 'api'] as const) {
+          try {
+            const saved = localStorage.getItem(`nori-model-profile-${modeName}`) || '';
+            if (catalog.profiles.some(p => p.id === saved && p.mode === modeName && p.configured && p.available !== false)) lastModelProfiles.current[modeName] = saved;
+          } catch { /* Storage may be disabled. */ }
         }
-
-        setIngestStatus(`Tải lên thành công! Tài liệu đang được trích xuất đồ thị...`);
-        setTimeout(() => setIngestStatus(null), 3000);
-      } catch (err: any) {
-        setIngestError(`Lỗi tải lên: ${err.message}`);
-        setTimeout(() => setIngestError(null), 4000);
-      } finally {
-        setIsIngesting(false);
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const onDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const onDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFileUpload(e.dataTransfer.files[0]);
-    }
-  };
-
-  // Send query to API
-  const handleSendMessage = async (text: string) => {
-    if (isQuerying) return;
-    
-    const userMsg: Message = { role: 'user', text };
-    setMessages((prev) => [...prev, userMsg]);
-    setIsQuerying(true);
-    setLatency('...');
-    setThoughts([]);
-
-    const startTime = performance.now();
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: text,
-          tenant_id: selectedTenant
-        })
+        const profile = catalog.profiles.find(p => p.id === next);
+        if (profile) lastModelProfiles.current[profile.mode] = next;
+        try { localStorage.setItem('nori-model-profile', next); } catch { /* Storage may be disabled. */ }
+        return next;
       });
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const endTime = performance.now();
-      const durationMs = Math.round(endTime - startTime);
-      setLatency(`${durationMs}ms`);
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          text: data.answer,
-          sources: data.sources
-        }
-      ]);
-
-      if (data.thought_process) {
-        setThoughts(data.thought_process);
-      }
-      if (data.sources) {
-        setGraphSources(data.sources);
-      }
-    } catch (err: any) {
-      setLatency('Lỗi');
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          text: `**Lỗi hệ thống:** Không thể kết nối tới backend. Vui lòng đảm bảo cổng 8000 đang hoạt động. (${err.message})`
-        }
-      ]);
-    } finally {
-      setIsQuerying(false);
-    }
+    }).catch(() => { if (alive) setError('Chưa tải được danh sách mô hình. Hãy kiểm tra backend và tải lại trang.'); });
+    void check(); const interval = setInterval(check, 30000);
+    request<(string | null)[]>('/api/workspaces').then(v => { if (alive) { setTenants(v); setTenant(current => v.some(t => (t || '') === current) ? current : v.includes('minh_an_demo') ? 'minh_an_demo' : ''); } }).catch(() => {});
+    return () => { alive = false; clearInterval(interval); };
+  }, []);
+  useEffect(() => {
+    const controller = new AbortController();
+    const load = async () => {
+      try {
+        const [d, c] = await Promise.all([request<Document[]>(`/api/documents${workspace(tenant)}`, { signal: controller.signal }), request<Conversation[]>(`/api/conversations${workspace(tenant)}`, { signal: controller.signal })]);
+        setDocs(d); setChats(c);
+      } catch (e) { if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'Không kết nối được backend.'); }
+    };
+    void load(); const interval = setInterval(load, 6000);
+    return () => { controller.abort(); clearInterval(interval); };
+  }, [tenant]);
+  useEffect(() => { bottom.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, busy]);
+  useEffect(() => { if (!notice) return; const timeout = setTimeout(() => setNotice(''), 4500); return () => clearTimeout(timeout); }, [notice]);
+  const refresh = async () => { const [d, c] = await Promise.all([request<Document[]>(`/api/documents${workspace(tenant)}`), request<Conversation[]>(`/api/conversations${workspace(tenant)}`)]); setDocs(d); setChats(c); };
+  const newChat = () => { if (pending) return; generation.current++; setActive(null); setMessages([]); setDraft(''); setSourceMessage(null); setError(''); setView('chat'); setMobile(false); input.current?.focus(); };
+  const openChat = async (id: string) => {
+    if (pending) return;
+    const epoch = ++generation.current; setLoading(true); setError('');
+    try { const c = await request<Conversation>(`/api/conversations/${id}${workspace(tenant)}`); if (epoch === generation.current) { setActive(id); setMessages(c.messages || []); setView('chat'); setSourceMessage(null); setMobile(false); } }
+    catch (e) { setError(e instanceof Error ? e.message : 'Không mở được hội thoại.'); }
+    finally { setLoading(false); }
   };
-
-  return (
-    <div className="h-screen w-screen font-sans bg-background text-on-surface overflow-hidden relative select-none">
-      
-      {/* Top Navbar */}
-      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_-3px_rgba(93,230,255,0.05)]">
-        <div className="flex items-center gap-4">
-          <span className="font-bold text-lg text-secondary tracking-wide">Aetheris RAG</span>
-          <div className="hidden md:flex gap-6 ml-8">
-            <a className="font-semibold text-sm text-secondary border-b-2 border-secondary pb-1" href="#workspace">Workspace</a>
-            <a className="font-semibold text-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#models">Models</a>
-            <a className="font-semibold text-sm text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#security">Security</a>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors cursor-pointer">notifications</button>
-          <button className="material-symbols-outlined text-on-surface-variant hover:text-secondary transition-colors cursor-pointer">settings</button>
-          <div className="w-8 h-8 rounded-full overflow-hidden border border-secondary/30">
-            <img className="w-full h-full object-cover" alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNZXIzQx9tIoftU1Nds8KrbzLG3az0zHwDbkKqvZNb1-alFpZ2TNpK7TGLXW10qUgnDQkKrxBDQ_QdojWmmUzgjOGI_hK0d7fiw2Bxgie1QdYNd8bdoTG3K85cTMnmAc3UelG-76Hyso8OHLaEIdSBLyEO9F1uu8040XvASFkL7b6_oIuJBZfgNy8iL8p4C0g6EB03OGhqKF7Rtp99ssDfLlOW3pmlbRHqx3S5nVAwO0ijtkw8ym7N03eg2h3EVAXC-Wys3fNlMpM3" />
-          </div>
-        </div>
-      </nav>
-
-      {/* Workspace Panel Container */}
-      <main className="relative z-10 pt-16 h-full flex w-full">
-        
-        {/* Left Aside: Ingestion & Process */}
-        <aside className="w-[25%] h-[calc(100vh-64px)] glass-panel border-r border-white/10 flex flex-col py-6 px-6 gap-8 overflow-hidden">
-          
-          {/* Workspace Environment Dropdown */}
-          <div>
-            <label className="text-[12px] font-bold text-on-surface-variant/70 uppercase tracking-widest block mb-2">Workspace Environment</label>
-            <div className="relative">
-              <button
-                onClick={() => setIsTenantDropdownOpen(!isTenantDropdownOpen)}
-                className="w-full flex items-center justify-between bg-surface-container-high/40 p-3 rounded-lg border border-white/5 hover:border-secondary/50 transition-all text-left cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>corporate_fare</span>
-                  <span className="font-semibold text-sm text-on-surface">{tenantDisplayName}</span>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">unfold_more</span>
-              </button>
-
-              {isTenantDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-surface-container-low border border-white/10 rounded-lg shadow-xl z-[999] overflow-hidden glass-panel">
-                  <button
-                    onClick={() => handleTenantSelect('tenant_fpt_001', 'FPT Corporate (tenant_fpt_001)')}
-                    className="w-full p-3 text-left hover:bg-secondary/15 transition-all text-on-surface flex flex-col border-none bg-transparent cursor-pointer"
-                  >
-                    <span className="font-semibold text-sm text-on-surface">FPT Corporate</span>
-                    <span className="text-[11px] text-on-surface-variant">tenant_fpt_001</span>
-                  </button>
-                  <button
-                    onClick={() => handleTenantSelect('tenant_nvidia_002', 'NVIDIA Partner (tenant_nvidia_002)')}
-                    className="w-full p-3 text-left hover:bg-secondary/15 transition-all text-on-surface flex flex-col border-t border-white/5 border-b-none border-x-none bg-transparent cursor-pointer"
-                  >
-                    <span className="font-semibold text-sm text-on-surface">NVIDIA Partner</span>
-                    <span className="text-[11px] text-on-surface-variant">tenant_nvidia_002</span>
-                  </button>
-                  <button
-                    onClick={() => handleTenantSelect('tenant_general_003', 'General Tenant (tenant_general_003)')}
-                    className="w-full p-3 text-left hover:bg-secondary/15 transition-all text-on-surface flex flex-col border-t border-white/5 border-b-none border-x-none bg-transparent cursor-pointer"
-                  >
-                    <span className="font-semibold text-sm text-on-surface">General Public</span>
-                    <span className="text-[11px] text-on-surface-variant">tenant_general_003</span>
-                  </button>
-                  <button
-                    onClick={handleCustomTenant}
-                    className="w-full p-3 text-left hover:bg-secondary/15 transition-all text-on-surface flex items-center justify-between border-t border-white/5 border-b-none border-x-none bg-transparent cursor-pointer"
-                  >
-                    <span className="font-semibold text-sm text-secondary">Custom Tenant ID...</span>
-                    <span className="material-symbols-outlined text-sm text-secondary">edit</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Document Ingestion Zone */}
-          <div className="flex flex-col gap-4">
-            <h3 className="font-semibold text-secondary flex items-center gap-2 text-sm">
-              <span className="material-symbols-outlined text-sm">cloud_upload</span>
-              DOCUMENT INGESTION
-            </h3>
-            <div
-              onDragOver={onDragOver}
-              onDrop={onDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group relative ${
-                isIngesting 
-                  ? 'border-amber-500/50 bg-amber-500/5' 
-                  : 'border-secondary/20 bg-secondary/5 hover:bg-secondary/10 hover:border-secondary/40'
-              }`}
-            >
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={(e) => e.target.files?.[0] && handleFileUpload(e.target.files[0])}
-                className="hidden"
-                accept=".txt,.md,.json,.html"
-              />
-              
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-110 ${
-                isIngesting ? 'bg-amber-500/10 text-amber-500' : 'bg-secondary/10 text-secondary'
-              }`}>
-                <span className="material-symbols-outlined text-3xl">
-                  {isIngesting ? 'progress_activity' : 'upload_file'}
-                </span>
-              </div>
-
-              <div className="text-center">
-                <p className="font-medium text-sm text-on-surface">
-                  {isIngesting ? 'Đang tải tài liệu...' : 'Thả tệp hoặc click chọn'}
-                </p>
-                <p className="text-[11px] text-on-surface-variant/70 uppercase tracking-widest mt-1">/api/ingest</p>
-              </div>
-            </div>
-
-            {/* Ingestion status alert messages */}
-            {ingestStatus && (
-              <div className="text-xs p-3 rounded bg-amber-500/20 text-amber-300 flex items-center gap-2 border border-amber-500/30">
-                <span className="material-symbols-outlined text-sm">info</span>
-                <span>{ingestStatus}</span>
-              </div>
-            )}
-            {ingestError && (
-              <div className="text-xs p-3 rounded bg-red-500/20 text-red-300 flex items-center gap-2 border border-red-500/30">
-                <span className="material-symbols-outlined text-sm">error</span>
-                <span>{ingestError}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Staggered thoughts timeline */}
-          <ThoughtProcess thoughts={thoughts} />
-        </aside>
-
-        {/* Center Panel: Chat logs */}
-        <ChatWindow
-          messages={messages}
-          onSendMessage={handleSendMessage}
-          isQuerying={isQuerying}
-          latency={latency}
-          onAttachClick={() => fileInputRef.current?.click()}
-        />
-
-        {/* Right Aside: 3D Visualization */}
-        <aside className="w-[35%] h-[calc(100vh-64px)] glass-panel border-l border-white/10 flex flex-col overflow-hidden relative">
-          
-          {/* Graph Visualization Container */}
-          <div className="relative flex-1 bg-surface-container-lowest/10">
-            <GraphVisualizer
-              sources={graphSources}
-              onNodeHover={setHoveredNode}
-              onStatsChange={(nodes, edges) => setStats({ nodes, edges })}
-            />
-
-            {/* Header Overlay */}
-            <div className="absolute top-6 left-6 right-6 flex justify-between items-start pointer-events-none">
-              <div className="pointer-events-auto">
-                <h3 className="text-xs font-bold text-secondary uppercase tracking-widest">KNOWLEDGE GRAPH</h3>
-                <p className="text-[12px] text-on-surface-variant">Mapping Semantic Entities</p>
-              </div>
-              <div className="flex gap-2 pointer-events-auto">
-                <button 
-                  onClick={() => alert("Zoom & xoay đồ thị bằng cách nhấp và kéo chuột trên màn hình 3D.")}
-                  className="w-10 h-10 rounded-lg bg-surface/80 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-surface hover:text-secondary transition-colors shadow-lg cursor-pointer"
-                >
-                  <span className="material-symbols-outlined text-[20px]">zoom_in</span>
-                </button>
-                <button 
-                  onClick={() => setGraphSources([])}
-                  className="w-10 h-10 rounded-lg bg-surface/80 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-surface hover:text-secondary transition-colors shadow-lg cursor-pointer"
-                  title="Đặt lại Graph"
-                >
-                  <span className="material-symbols-outlined text-[20px]">recenter</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Dynamic Bottom Detail Panel */}
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="glass-panel p-5 rounded-2xl border-l-4 border-l-tertiary cyan-glow">
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-tertiary">database_search</span>
-                    <span className="font-semibold text-sm text-on-surface">
-                      {hoveredNode ? hoveredNode.name : 'Chưa chọn thực thể'}
-                    </span>
-                  </div>
-                  <span className="text-[10px] bg-tertiary/20 text-tertiary px-2 py-0.5 rounded uppercase font-bold tracking-tighter">
-                    {hoveredNode ? hoveredNode.type : 'NONE'}
-                  </span>
-                </div>
-                <p className="text-[13px] text-on-surface-variant leading-relaxed">
-                  {hoveredNode ? hoveredNode.fact : 'Rê chuột vào các nút hình cầu trong đồ thị 3D để kiểm tra chi tiết các thực thể liên quan và liên kết ngữ cảnh.'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats Bar */}
-          <div className="p-6 bg-surface-container-high/40 border-t border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex flex-col">
-                <span className="text-[10px] text-on-surface-variant/50 uppercase font-bold">Nodes</span>
-                <span className="font-bold text-[18px] text-secondary">{stats.nodes}</span>
-              </div>
-              <div className="w-px h-8 bg-white/10"></div>
-              <div className="flex flex-col">
-                <span className="text-[10px] text-on-surface-variant/50 uppercase font-bold">Edges</span>
-                <span className="font-bold text-[18px] text-tertiary">{stats.edges}</span>
-              </div>
-            </div>
-            <button 
-              onClick={() => alert(`Các thực thể đang hiển thị: ${stats.nodes} nút, ${stats.edges} liên kết.`)}
-              className="font-semibold text-[12px] text-on-surface hover:text-secondary flex items-center gap-2 border border-white/10 px-4 py-2 rounded-lg bg-white/5 transition-all cursor-pointer"
-            >
-              CHI TIẾT <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </button>
-          </div>
-        </aside>
-      </main>
-    </div>
-  );
+  const changeModel = (id: string) => {
+    if (pending || id === modelProfile) return;
+    const profile = modelCatalog?.profiles.find(p => p.id === id);
+    if (!profile?.configured || profile.available === false) return;
+    newChat(); setModelProfile(id); lastModelProfiles.current[profile.mode] = id;
+    try { localStorage.setItem('nori-model-profile', id); localStorage.setItem(`nori-model-profile-${profile.mode}`, id); } catch { /* Storage may be disabled. */ }
+  };
+  const changeExecution = (next: 'local' | 'api') => {
+    const id = lastModelProfiles.current[next] || (next === 'local' ? modelCatalog?.local_default_id : modelCatalog?.api_default_id);
+    if (id) changeModel(id);
+  };
+  const send = async (text = draft) => {
+    const question = text.trim(); if (!question || pending || sendLock.current || !selectedModel?.configured) return;
+    sendLock.current = true; const epoch = generation.current;
+    const previous = messages; setMessages([...previous, { id: crypto.randomUUID(), role: 'user', text: question }]); setDraft(''); setBusy(true); setError(''); setView('chat');
+    try {
+      const data = await request<{ answer: string; sources: Source[]; thought_process: string[]; conversation_id: string; failure_reason?: string | null }>('/api/query', { method: 'POST', signal: AbortSignal.timeout(executionMode === 'api' ? 430000 : 250000), body: JSON.stringify({ query: question, tenant_id: tenant || null, conversation_id: active, mode, model_profile: modelProfile }) });
+      if (epoch === generation.current) { setActive(data.conversation_id); if (data.failure_reason) setNotice(data.failure_reason + ' Có thể chọn provider khác.'); setMessages(prev => [...prev, { id: crypto.randomUUID(), role: 'assistant', text: data.answer, sources: data.sources, steps: data.thought_process }]); void refresh().catch(() => setNotice('Câu trả lời đã lưu. Chưa tải lại được danh sách hội thoại.')); }
+    } catch (e) { if (epoch === generation.current) { setMessages(previous); setDraft(question); setError(e instanceof Error ? e.message : 'Không nhận được câu trả lời.'); } }
+    finally { setBusy(false); sendLock.current = false; input.current?.focus(); }
+  };
+  const upload = async (f: File) => {
+    if (pending) return;
+    if (!/\.(txt|md)$/i.test(f.name)) { setError('Hãy chọn tệp văn bản .txt hoặc .md.'); return; }
+    if (f.size > 1000000) { setError('Tệp vượt quá giới hạn 1 MB.'); return; }
+    setUploading(true); setError('');
+    try {
+      const content = await f.text(); if (!content.trim() || content.includes('\u0000')) throw new Error('Tệp rỗng hoặc không phải văn bản UTF-8.');
+      await request('/api/ingest', { method: 'POST', body: JSON.stringify({ title: f.name, content, metadata: { tenant_id: tenant || null } }) });
+      await refresh(); setNotice(`Đã lưu ${f.name}. Đang tạo chỉ mục vector và đồ thị.`);
+    } catch (e) { setError(e instanceof Error ? e.message : 'Không tải được tài liệu.'); }
+    finally { setUploading(false); if (file.current) file.current.value = ''; }
+  };
+  const remove = async () => {
+    if (!confirm || pending) return; setLoading(true);
+    try { await request(`/api/${confirm.kind === 'chat' ? 'conversations' : 'documents'}/${confirm.id}${workspace(tenant)}`, { method: 'DELETE' }); if (confirm.kind === 'chat' && active === confirm.id) { setActive(null); setMessages([]); } setConfirm(null); await refresh(); setNotice('Đã xóa.'); }
+    catch (e) { setError(e instanceof Error ? e.message : 'Không xóa được.'); setConfirm(null); }
+    finally { setLoading(false); }
+  };
+  const copy = async (m: Message) => { try { await navigator.clipboard.writeText(m.text); setCopied(m.id); setTimeout(() => setCopied(null), 1800); } catch { setError('Trình duyệt chưa cho phép sao chép.'); } };
+  const prompts = docs.length ? [ { title: 'Tóm tắt tài liệu', detail: 'Nắm bắt những ý chính', icon: FileText, query: `Tóm tắt những nội dung chính của tài liệu ${docs[0].title}` }, { title: 'Khám phá kiến thức', detail: 'Đi sâu vào điều bạn quan tâm', icon: Sparkles, query: `Các khái niệm quan trọng trong tài liệu ${docs[0].title} là gì?` }, { title: 'Kết nối thông tin', detail: 'Tìm các mối liên hệ', icon: BookOpen, query: `Phân tích các mối quan hệ được đề cập trong tài liệu ${docs[0].title}` } ] : [];
+  return <div className="app-shell">
+    {mobile && <button className="scrim" onClick={() => setMobile(false)} aria-label="Đóng thanh bên"/>}
+    <aside className={`sidebar ${mobile ? 'mobile-open' : ''}`}>
+      <div className="brand"><button className="brand-name" onClick={newChat}><Mark small/><span>nori<span className="brand-dot">.</span></span></button><button className="icon sidebar-close" onClick={() => setMobile(false)} aria-label="Đóng thanh bên"><PanelLeftClose size={18}/></button></div>
+      <button className="new-chat" onClick={newChat} disabled={pending}><Plus size={18}/>Cuộc trò chuyện mới<span className="shortcut">＋</span></button>
+      <nav><button className={view === 'chat' ? 'nav-item selected' : 'nav-item'} onClick={() => { setView('chat'); setMobile(false); }}><MessageSquare size={18}/>Trò chuyện</button><button className={view === 'library' ? 'nav-item selected' : 'nav-item'} onClick={() => { setView('library'); setMobile(false); }}><FolderOpen size={18}/>Thư viện tài liệu<span className="count">{docs.length}</span></button></nav>
+      <div className="history-label">GẦN ĐÂY <span>{chats.length}</span></div>
+      <div className="history">{chats.length ? chats.map(c => <div key={c.id} className={`history-row ${active === c.id ? 'active' : ''}`}><button onClick={() => void openChat(c.id)} disabled={pending}><MessageSquare size={15}/><span>{c.title}</span></button><button className="delete-chat icon" onClick={() => setConfirm({ kind: 'chat', id: c.id, title: c.title })} disabled={pending} aria-label={`Xóa hội thoại ${c.title}`}><Trash2 size={14}/></button></div>) : <p className="history-empty">Một ý tưởng hay bắt đầu<br/>từ một câu hỏi.</p>}</div>
+      <div className="sidebar-bottom"><div className="workspace-card"><span className="workspace-icon"><Leaf size={18}/></span><div><strong>Không gian của bạn</strong><span>Kiến thức, ở ngay đây.</span></div><span className={`connection-dot ${health?.services.postgres ? 'online' : ''}`}/></div><button className="profile" onClick={() => setSettings(true)}><span className="avatar">B</span><div><strong>Bạn</strong><span>Không gian cá nhân</span></div><Settings2 size={17}/></button></div>
+    </aside>
+    <main className="main">
+      <header className="topbar"><div className="topbar-left"><button className="icon mobile-menu" onClick={() => setMobile(true)} aria-label="Mở thanh bên"><Menu size={20}/></button><span className="product-name">Nori</span><span className="topbar-divider">/</span><label className="workspace-select"><select aria-label="Chọn không gian tài liệu" value={tenant} disabled={pending} onChange={e => { generation.current++; setTenant(e.target.value); try { localStorage.setItem('nori-workspace', e.target.value); } catch { /* Storage may be disabled. */ } setDocs([]); setChats([]); setMessages([]); setActive(null); setSourceMessage(null); setError(''); }}>{tenants.map(t => <option key={t || 'global'} value={t || ''}>{workspaceName(t || '')}</option>)}</select><ChevronDown size={14}/></label></div><div className="topbar-actions"><span className={`local-status ${health?.services.llm && health.services.postgres ? '' : 'offline'}`}><span className="connection-dot online"/>{executionMode === 'api' ? selectedModel?.configured ? 'API · Đã cấu hình' : 'API · Chưa cấu hình' : health?.services.llm && health.services.postgres ? 'Local · Đã kết nối' : 'Local · Chưa sẵn sàng'}</span><button className="icon" onClick={() => setDark(!dark)} aria-label={dark ? 'Bật giao diện sáng' : 'Bật giao diện tối'}>{dark ? <Sun size={18}/> : <Moon size={18}/>}</button></div></header>
+      <input type="file" hidden ref={file} accept=".txt,.md" onChange={e => { if (e.target.files?.[0]) void upload(e.target.files[0]); }}/>
+      {(error || notice) && <div className={`toast ${error ? 'error' : ''}`} role={error ? 'alert' : 'status'}><span>{error || notice}</span><button className="icon" onClick={() => { setError(''); setNotice(''); }} aria-label="Đóng thông báo"><X size={16}/></button></div>}
+      {view === 'library' ? <section className="library" onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); if (e.dataTransfer.files[0]) void upload(e.dataTransfer.files[0]); }}><div className="page-eyebrow"><FolderOpen size={16}/>KIẾN THỨC CỦA BẠN</div><div className="library-heading"><div><h1>Thư viện tài liệu<span>.</span></h1><p>{workspaceName(tenant)} · {docs.length} tài liệu trong không gian này.</p></div><button className="primary-button" disabled={pending} onClick={() => file.current?.click()}>{uploading ? <LoaderCircle className="spin" size={17}/> : <Plus size={17}/>}Thêm tài liệu</button></div><label className="search-field"><Search size={18}/><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Tìm trong thư viện…" aria-label="Tìm tài liệu"/></label><div className="document-list">{docs.filter(d => d.title.toLowerCase().includes(search.toLowerCase())).map(d => <article className="document-row" key={d.id}><span className="document-icon"><FileText size={22}/></span><button className="document-info" onClick={() => setPreview(d)}><strong>{d.title}</strong><span>{d.characters.toLocaleString('vi-VN')} ký tự · {new Date(d.created_at).toLocaleDateString('vi-VN')}</span></button><span className={`document-status ${d.metadata?.status === 'processing' ? 'processing' : ''}`}>{d.metadata?.status === 'processing' ? 'Đang lập chỉ mục' : d.metadata?.status === 'text_only' ? 'Tìm kiếm văn bản' : 'Sẵn sàng'}</span><button className="icon" disabled={pending} onClick={() => setConfirm({ kind: 'document', id: d.id, title: d.title })} aria-label={`Xóa tài liệu ${d.title}`}><Trash2 size={17}/></button></article>)}</div>{!docs.length && <div className="empty-library"><BookOpen size={36}/><h2>Góc kiến thức đang chờ bạn.</h2><p>Thả một tệp .txt hoặc .md vào đây để bắt đầu.</p></div>}{docs.length > 0 && search && !docs.some(d => d.title.toLowerCase().includes(search.toLowerCase())) && <p className="no-results">Không có tài liệu phù hợp.</p>}<div className="upload-note"><Upload size={16}/>Kéo thả tệp vào đây · TXT, Markdown · Tối đa 1 MB</div></section> : <>
+      <section className={`chat-scroll ${messages.length ? 'has-messages' : ''}`}>
+        {!messages.length && !loading ? <div className="welcome"><div className="welcome-mark"><Mark/></div><div className="eyebrow">MỘT CHÚT TÒ MÒ. THẬT NHIỀU KHẢ NĂNG.</div><h1>Chào bạn,<br/>hôm nay ta khám phá gì<span>?</span></h1><p>Hỏi, tìm hiểu và kết nối những điều bạn biết.<br/>Nori cùng bạn tìm câu trả lời từ tài liệu của mình.</p><div className="suggestions">{prompts.map(p => <button key={p.title} disabled={pending} onClick={() => void send(p.query)}><div className="suggestion-top"><p.icon size={20}/><ArrowUpRight size={15}/></div><strong>{p.title}</strong><span>{p.detail}</span></button>)}{!docs.length && <button className="first-upload" disabled={pending} onClick={() => file.current?.click()}><Upload size={20}/><strong>Thêm tài liệu đầu tiên</strong><span>Bắt đầu từ kiến thức của bạn</span></button>}</div><button className="welcome-library" onClick={() => setView('library')}><span className="mini-files"><FileText size={14}/></span>{docs.length ? `${docs.length} tài liệu trong không gian này` : 'Thư viện của bạn đang trống'}<ChevronRight size={14}/></button></div> : <div className="message-list">{messages.map(m => <article className={`message ${m.role}`} key={m.id}>{m.role === 'assistant' && <div className="assistant-heading"><Mark small/><strong>Nori</strong></div>}<div className="message-body"><RichText text={m.text} onSource={() => setSourceMessage(m)}/></div>{m.role === 'assistant' && <div className="message-tools">{!!m.sources?.length && <button className="source-button" onClick={() => setSourceMessage(m)}><BookOpen size={14}/>{m.sources.length} nguồn tham khảo<ChevronRight size={14}/></button>}<button className="icon" onClick={() => void copy(m)} aria-label="Sao chép câu trả lời">{copied === m.id ? <Check size={15}/> : <Copy size={15}/>}</button>{!!m.steps?.length && <details className="steps"><summary>Quá trình xử lý</summary><ol>{m.steps.map((step, i) => <li key={i}>{step}</li>)}</ol></details>}</div>}</article>)}{busy && <div className="thinking" role="status"><Mark small/><span>Nori đang tìm và tổng hợp thông tin</span><span className="thinking-dots"><i/><i/><i/></span></div>}{loading && <div className="thinking" role="status"><LoaderCircle className="spin" size={18}/>Đang mở hội thoại…</div>}<div ref={bottom}/></div>}
+      </section>
+      <div className="composer-wrap"><div className="model-controls"><div className="execution-toggle" role="group" aria-label="Chọn hướng chạy"><button type="button" className={executionMode === 'local' ? 'selected' : ''} disabled={pending || !modelCatalog} onClick={() => changeExecution('local')}>Local</button><button type="button" className={executionMode === 'api' ? 'selected' : ''} disabled={pending || !modelCatalog?.api_default_id} onClick={() => changeExecution('api')}>API</button></div><label className="model-picker"><select aria-label="Chọn mô hình" value={modelProfile} disabled={pending || !modelCatalog} onChange={e => changeModel(e.target.value)}>{!modelCatalog && <option value="">Đang tải mô hình…</option>}{Array.from(new Set(modelCatalog?.profiles.filter(p => p.mode === executionMode).map(p => p.label))).map(label => <optgroup key={label} label={label}>{modelCatalog?.profiles.filter(p => p.mode === executionMode && p.label === label).map(p => <option key={p.id} value={p.id} disabled={!p.configured || p.available === false}>{p.model}{!p.configured ? ' · chưa có khóa' : p.available === false ? ' · không còn trong danh sách' : p.available === null ? ' · chưa xác minh' : ''}</option>)}</optgroup>)}</select><ChevronDown size={13}/></label></div><form className="composer" onSubmit={e => { e.preventDefault(); void send(); }}><textarea ref={input} value={draft} maxLength={8000} onChange={e => setDraft(e.target.value)} placeholder="Hỏi Nori bất cứ điều gì từ tài liệu của bạn…" aria-label="Nhập câu hỏi" rows={2} disabled={pending} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(); } }}/><div className="composer-toolbar"><div className="composer-options"><button type="button" className="icon attach" onClick={() => file.current?.click()} disabled={pending} aria-label="Đính kèm tài liệu">{uploading ? <LoaderCircle className="spin" size={18}/> : <Paperclip size={19}/>}</button><span className="toolbar-divider"/><label className="mode-select"><Sparkles size={14}/><select value={mode} disabled={pending} onChange={e => setMode(e.target.value)} aria-label="Chế độ truy xuất"><option value="hybrid">Tìm kiếm kết hợp</option><option value="documents">Chỉ tài liệu</option></select><ChevronDown size={13}/></label></div><button className="send-button" type="submit" disabled={!draft.trim() || pending || !selectedModel?.configured} aria-label="Gửi câu hỏi">{busy ? <LoaderCircle size={19} className="spin"/> : <ArrowUp size={20}/>}</button></div></form><div className="composer-footer"><span>Nori có thể mắc lỗi. Hãy kiểm tra các nguồn tham khảo.</span><button onClick={() => setSettings(true)}><span className={`connection-dot ${health?.services.llm ? 'online' : ''}`}/>{selectedModel ? `${selectedModel.label} · ${selectedModel.model}` : 'Đang tải mô hình'}<ChevronDown size={11}/></button></div></div>
+      </>}
+    </main>
+    {sourceMessage && <Dialog title="Nguồn tham khảo" close={() => setSourceMessage(null)}><p className="dialog-description">Các đoạn thông tin được truy xuất cho câu trả lời này.</p><div className="sources-list">{sourceMessage.sources?.map((s, i) => <article key={i}><div className="source-title"><span>{i+1}</span><strong>{s.title}</strong><small>{s.source_type === 'graph' ? 'Neo4j' : s.source_type === 'vector' ? 'pgvector' : 'Văn bản'}</small></div><p>{s.content || s.context_string}</p></article>)}</div></Dialog>}
+    {preview && <Dialog title={preview.title} close={() => setPreview(null)}><p className="dialog-description">Nội dung tài liệu đã lưu trong PostgreSQL.</p><pre className="document-preview">{preview.content}</pre></Dialog>}
+    {settings && <Dialog title="Không gian của Nori" close={() => setSettings(false)}><p className="dialog-description">Kết nối với dữ liệu và mô hình của dự án.</p><div className="settings-section"><h3>Giao diện</h3><div className="theme-options"><button className={!dark ? 'chosen' : ''} onClick={() => setDark(false)}><Sun size={19}/>Sáng{!dark && <Check size={16}/>}</button><button className={dark ? 'chosen' : ''} onClick={() => setDark(true)}><Moon size={19}/>Tối{dark && <Check size={16}/>}</button></div></div><div className="settings-section"><h3>Kết nối hệ thống</h3>{[['PostgreSQL · tài liệu & hội thoại', health?.services.postgres], ['Neo4j · đồ thị tri thức', health?.services.neo4j], [`${health?.provider || 'Mô hình'} · ${health?.model || 'chưa kết nối'}`, health?.services.llm]].map(([label, status]) => <div className="service-row" key={String(label)}><span>{label}</span><span className={status ? 'service-ready' : 'service-offline'}>{status ? 'Sẵn sàng' : 'Chưa kết nối'}</span></div>)}</div><div className="settings-note"><Leaf size={18}/><p>{executionMode === 'api' ? 'Hướng API dùng mô hình đã chọn từ cấu hình Hermes. Các đoạn tài liệu truy xuất được gửi đến provider đó.' : 'Hướng Local dùng Ollama trên máy này. Bước tổng hợp và kiểm chứng chạy tại máy.'} Tài liệu và hội thoại vẫn lưu trong PostgreSQL; dịch vụ embedding giữ cấu hình hiện tại.</p></div></Dialog>}
+    {confirm && <Dialog title="Xóa nội dung này?" close={() => setConfirm(null)}><p className="dialog-description">“{confirm.title}” sẽ được xóa khỏi không gian hiện tại. Thao tác này không thể hoàn tác.</p><div className="confirm-actions"><button className="secondary-button" disabled={loading} onClick={() => setConfirm(null)}>Giữ lại</button><button className="danger-button" disabled={loading} onClick={() => void remove()}>{loading ? 'Đang xóa…' : 'Xóa'}</button></div></Dialog>}
+  </div>;
 }

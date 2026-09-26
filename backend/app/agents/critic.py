@@ -3,8 +3,15 @@ import re
 import httpx
 from openai import AsyncOpenAI
 from backend.app.config import settings
+from backend.app.models import selected_profile
 
 def provider_config():
+    profile = selected_profile.get()
+    if profile is not None:
+        return profile.base_url, profile.api_key, profile.model
+    return default_provider_config()
+
+def default_provider_config():
     p=settings.LLM_PROVIDER.lower()
     if p == 'ollama': return settings.OLLAMA_BASE_URL, 'ollama', settings.OLLAMA_MODEL
     if p == 'gemini': return 'https://generativelanguage.googleapis.com/v1beta/openai/', settings.GEMINI_API_KEY, settings.LLM_MODEL
@@ -15,8 +22,12 @@ def provider_config():
 
 async def complete(messages, timeout=60, json_mode=False):
     url,key,model=provider_config()
-    if settings.LLM_PROVIDER.lower() == 'ollama':
-        base = settings.OLLAMA_BASE_URL.rstrip('/')
+    profile = selected_profile.get()
+    provider = profile.provider if profile is not None else settings.LLM_PROVIDER.lower()
+    if profile is not None and profile.mode == 'api':
+        timeout = 60 if timeout <= 25 else 120
+    if provider == 'ollama':
+        base = url.rstrip('/')
         if base.endswith('/v1'):
             base = base[:-3]
         payload = dict(model=model, messages=messages, stream=False,
@@ -33,7 +44,9 @@ async def complete(messages, timeout=60, json_mode=False):
     if not key: raise RuntimeError('LLM credentials are not configured')
     async with AsyncOpenAI(base_url=url, api_key=key, timeout=timeout, max_retries=0) as client:
         options = {'response_format': {'type': 'json_object'}} if json_mode else {}
-        result=await client.chat.completions.create(model=model, messages=messages, temperature=0, max_tokens=2400, **options)
+        if provider == 'gemini':
+            options['reasoning_effort'] = 'low'
+        result=await client.chat.completions.create(model=model, messages=messages, temperature=0, max_tokens=8192, **options)
         answer=result.choices[0].message.content or ''
         if not answer.strip(): raise RuntimeError('Model returned an empty answer')
         return answer.strip()
