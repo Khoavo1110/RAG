@@ -257,3 +257,11 @@ def test_fallback_keeps_all_conditions_in_primary_source():
     answer=router.extractive_answer([source],"Why is payment blocked?")
     assert "Engineer sends repair." in answer
     assert "Failover must not exceed 60 seconds." in answer
+
+
+def test_failed_generation_returns_original_evidence(monkeypatch):
+    setup(monkeypatch,[])
+    monkeypatch.setattr(router,"complete",AsyncMock(side_effect=TimeoutError()))
+    result=asyncio.run(router.AgenticRAG().ainvoke({"query":"failover","route":"documents"}))
+    assert result["answer_mode"] == "extractive"
+    assert "Failover must not exceed 60 seconds." in result["final_answer"]
