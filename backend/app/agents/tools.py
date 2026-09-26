@@ -1,142 +1,169 @@
-from typing import List, Dict, Any
-from sqlalchemy.orm import Session
-from backend.app.config import settings
+import asyncio
+import math
+import re
+import unicodedata
+from collections import Counter
 from backend.app.schemas import Document, DocumentChunk
+from backend.app.ingestion.database_sync import SessionLocal, tenant_filter
 from backend.app.ingestion.chunker import DocumentChunker
 from backend.app.ingestion.graph_extractor import graph_extractor
-from graphiti_core.search.search_config import SearchResults
-from graphiti_core.search.search_helpers import search_results_to_context_string
 
-# Reuse chunker for query embeddings
-chunker = DocumentChunker()
+STOP=set('va la cua cho cac mot nhung voi duoc trong co toi ban nay gi nao the de ve hay bao nhieu'.split())
+def tokens(text):
+    folded=unicodedata.normalize('NFD',text.lower()).replace('đ','d')
+    return [x for x in re.findall(r'[a-z0-9]+',''.join(c for c in folded if not unicodedata.combining(c))) if x not in STOP and len(x)>1]
 
-def vector_search_tool(
-    db: Session,
-    query: str,
-    tenant_id: str | None = None,
-    limit: int = 5
-) -> List[Dict[str, Any]]:
+def lexical_search(query,tenant_id=None,limit=12):
+    with SessionLocal() as db:
+        docs=tenant_filter(db.query(Document),tenant_id).all()
+        corpus=[dict(title=d.title,document_id=d.id,content=c,chunk_index=i,source_type='text')
+                for d in docs for i,c in enumerate(DocumentChunker().split_text(d.content))]
+    terms=set(tokens(query))
+    if not terms or not corpus: return []
+    counts=[Counter(tokens(c['title']+' '+c['content'])) for c in corpus]
+    avg=sum(sum(c.values()) for c in counts)/len(counts) or 1
+    ranked=[]
+    for chunk,count in zip(corpus,counts):
+        score=0.0
+        for term in terms:
+            tf=count[term]
+            df=sum(term in c for c in counts)
+            idf=math.log(1+(len(counts)-df+0.5)/(df+0.5))
+            score+=idf*tf*2.2/(tf+1.2*(0.25+0.75*sum(count.values())/avg))
+        if score>0: ranked.append({**chunk,'score':round(score,4)})
+    return sorted(ranked,key=lambda c:c['score'],reverse=True)[:limit]
+
+def vector_search_tool(db,query,tenant_id=None,limit=12):
+    vector=DocumentChunker().generate_embeddings([query])[0]
+    distance=DocumentChunk.embedding.cosine_distance(vector)
+    rows=tenant_filter(db.query(DocumentChunk,distance.label('distance')).join(Document),tenant_id).order_by(distance).limit(limit).all()
+    return [dict(title=c.document.title,document_id=c.document_id,content=c.content,chunk_index=c.chunk_index,source_type='vector',score=round(1-d,4)) for c,d in rows if d<0.65]
+
+def vector_search(query,tenant_id):
+    with SessionLocal() as db: return vector_search_tool(db,query,tenant_id,limit=12)
+
+async def graph_search_tool(db,query,tenant_id=None):
+    groups=[tenant_id] if tenant_id else None
+    edges=await asyncio.wait_for(graph_extractor.graphiti.search(query,group_ids=groups),timeout=12)
+    edges=edges.edges if hasattr(edges,'edges') else edges
+    docs=tenant_filter(db.query(Document),tenant_id).all()
+    allowed={(d.metadata_json or {}).get('graphiti_episode_uuid') for d in docs}-{None}
+    facts=[dict(fact=e.fact,episodes=e.episodes,source_node_uuid=e.source_node_uuid,target_node_uuid=e.target_node_uuid) for e in edges if allowed.intersection(e.episodes)]
+    return dict(source_type='graph',context_string='\n'.join(f['fact'] for f in facts),raw_facts=facts)
+
+async def graph_search(query,tenant_id):
+    with SessionLocal() as db: return await graph_search_tool(db,query,tenant_id)
+
+
+CODE = re.compile(r"\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+\b")
+
+
+def scoped_documents(tenant_id):
+    with SessionLocal() as db:
+        return tenant_filter(db.query(Document), tenant_id).all()
+
+
+def fuse_sources(vector, lexical):
+    """Reciprocal rank fusion avoids mixing cosine similarity with BM25 scores."""
+    scores, records = {}, {}
+    for ranked in (vector, lexical):
+        seen = set()
+        for rank, source in enumerate(ranked, 1):
+            key = source.get('document_id')
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            scores[key] = scores.get(key, 0) + 1 / (60 + rank)
+            records.setdefault(key, source)
+    return [dict(records[key], fusion_score=scores[key])
+            for key in sorted(scores, key=lambda key: -scores[key])]
+
+
+def evidence_window(content, query, limit=2400):
+    """Keep whole small documents; select original paragraphs for larger ones."""
+    if len(content) <= limit:
+        return content
+    terms = set(tokens(query))
+    paragraphs = content.split('\n\n')
+    scored = sorted(range(len(paragraphs)),
+                    key=lambda i: -len(terms.intersection(tokens(paragraphs[i]))))
+    selected, length = [], 0
+    for index in scored:
+        paragraph = paragraphs[index]
+        if len(paragraph) > limit:
+            if selected:
+                continue
+            for chunk in DocumentChunker(chunk_size=limit, chunk_overlap=min(100, max(0, limit-1))).split_text(paragraph):
+                if terms.intersection(tokens(chunk)):
+                    return chunk
+            return paragraph[:limit]
+        if length + len(paragraph) + 2 <= limit:
+            selected.append(index)
+            length += len(paragraph) + 2
+    return '\n\n'.join(paragraphs[i] for i in sorted(selected))
+
+
+def expand_evidence(query, tenant_id, ranked, graph_facts, max_documents=12, max_hops=2):
+    """Resolve explicit references and episode provenance only inside this workspace.
+
+    Graph facts select original documents; model-extracted facts are never themselves
+    presented as authoritative evidence. Expansion is bounded to two reference hops.
     """
-    Search vector database (PostgreSQL + pgvector) for semantic chunks.
-    Filters by tenant_id if provided.
-    """
-    # 1. Generate query embedding
-    query_vector = chunker.generate_embeddings([query])[0]
-
-    # 2. Query document chunks and join with documents to get metadata
-    query_obj = db.query(DocumentChunk).join(Document)
-
-    # 3. Apply tenant isolation filter
-    if tenant_id:
-        query_obj = query_obj.filter(Document.metadata_json['tenant_id'].astext == tenant_id)
-
-    # 4. Perform cosine distance search
-    vector_results = query_obj.order_by(
-        DocumentChunk.embedding.cosine_distance(query_vector)
-    ).limit(limit).all()
-
-    # 5. Format results
-    formatted_results = []
-    for chunk in vector_results:
-        formatted_results.append({
-            "content": chunk.content,
-            "document_id": chunk.document_id,
-            "title": chunk.document.title,
-            "chunk_index": chunk.chunk_index,
-            "source_type": "vector"
-        })
-
-    return formatted_results
-
-async def graph_search_tool(
-    db: Session,
-    query: str,
-    tenant_id: str | None = None
-) -> Dict[str, Any]:
-    """
-    Search knowledge graph (Neo4j + Graphiti) for relationships and facts.
-    Filters results at the tenant level if tenant_id is provided.
-    """
-    # 1. Query raw graph search results from Graphiti, passing group_ids for tenant isolation
-    group_ids = [tenant_id] if tenant_id else None
-    raw_results = await graph_extractor.graphiti.search(query, group_ids=group_ids)
-
-    # Normalize raw_results (handle list vs SearchResults)
-    if hasattr(raw_results, "edges"):
-        edges_list = raw_results.edges
-    else:
-        edges_list = raw_results
-
-    # 2. Defense-in-depth: filter by Postgres allowed episode UUIDs if tenant_id is provided
-    if tenant_id:
-        doc_records = db.query(Document).filter(
-            Document.metadata_json['tenant_id'].astext == tenant_id
-        ).all()
-        
-        allowed_episode_uuids = {
-            doc.metadata_json.get("graphiti_episode_uuid")
-            for doc in doc_records
-            if doc.metadata_json and doc.metadata_json.get("graphiti_episode_uuid")
-        }
-
-        # Filter edges (facts) to only those originating from allowed episodes
-        filtered_edges = [
-            edge for edge in edges_list
-            if any(ep_uuid in allowed_episode_uuids for ep_uuid in edge.episodes)
-        ]
-    else:
-        filtered_edges = edges_list
-
-    # 3. Format to a context string using a prompt helper JSON serializer
-    from graphiti_core.prompts.prompt_helpers import to_prompt_json
-    fact_json = [
-        {
-            'fact': edge.fact,
-            'valid_at': str(edge.valid_at) if edge.valid_at else 'date unknown',
-            'invalid_at': str(edge.invalid_at) if edge.invalid_at else 'Present',
-        }
-        for edge in filtered_edges
-    ]
-    
-    context_str = f"""
-    FACTS represent relevant context to the current conversation.
-    These are the most relevant facts and their valid and invalid dates. Facts are considered valid
-    between their valid_at and invalid_at dates. Facts with an invalid_at date of "Present" are considered valid.
-    <FACTS>
-            {to_prompt_json(fact_json)}
-    </FACTS>
-    """
-
-    # 4. Resolve source and target entity names to return to UI for network visualizer
-    node_names = {}
-    node_uuids = set()
-    for edge in filtered_edges:
-        if hasattr(edge, "source_node_uuid") and edge.source_node_uuid:
-            node_uuids.add(edge.source_node_uuid)
-        if hasattr(edge, "target_node_uuid") and edge.target_node_uuid:
-            node_uuids.add(edge.target_node_uuid)
-            
-    if node_uuids:
-        try:
-            nodes_list = await graph_extractor.graphiti.nodes.entity.get_by_uuids(list(node_uuids))
-            node_names = {node.uuid: node.name for node in nodes_list}
-        except Exception as e:
-            print(f"Error resolving entity node names: {e}")
-
-    # 5. Return structured dictionary
-    return {
-        "context_string": context_str,
-        "raw_facts": [
-            {
-                "fact": edge.fact,
-                "name": edge.name,
-                "episodes": edge.episodes,
-                "source_node_uuid": edge.source_node_uuid,
-                "target_node_uuid": edge.target_node_uuid,
-                "source_node_name": node_names.get(edge.source_node_uuid, "Unknown"),
-                "target_node_name": node_names.get(edge.target_node_uuid, "Unknown")
-            }
-            for edge in filtered_edges
-        ],
-        "source_type": "graph"
-    }
+    docs = scoped_documents(tenant_id)
+    by_id = {d.id: d for d in docs}
+    codes = {}
+    for doc in docs:
+        # Only a document's title/header identifies it, not references in its body.
+        header = doc.content.split('\n', 1)[0]
+        identity = doc.title.upper() + (' ' + header.upper() if header.startswith('#') else '')
+        for code in CODE.findall(identity):
+            codes.setdefault(code, []).append(doc.id)
+    requested = set(CODE.findall(query.upper()))
+    acronyms = set(re.findall(r'\b[A-Z]{3,}\b', query))
+    catalog_terms = set(tokens(' '.join(d.title + ' ' + d.content for d in docs)))
+    missing_acronyms = {word for word in acronyms if word.lower() not in catalog_terms}
+    if len(missing_acronyms) >= 2 and missing_acronyms == acronyms:
+        return []
+    anchors = [key for code in requested for key in codes.get(code, [])]
+    # An explicit unknown record must not be answered with unrelated similar records.
+    if requested and not anchors and not any(code in d.content.upper() for d in docs for code in requested):
+        return []
+    seeds = list(dict.fromkeys(anchors + [s['document_id'] for s in ranked if s.get('document_id') in by_id]))
+    episodes = {episode for fact in graph_facts for episode in fact.get('episodes', [])}
+    graph_ids = [d.id for d in docs if (d.metadata_json or {}).get('graphiti_episode_uuid') in episodes]
+    # Reserve capacity for relationships rather than filling it with shallow hits.
+    selected = list(dict.fromkeys(seeds[:6] + graph_ids[:2]))[:max_documents]
+    frontier = list(selected)
+    terms = set(tokens(query))
+    references = {doc.id: set(CODE.findall(doc.content.upper())) for doc in docs}
+    identities = {key: {code for code, ids in codes.items() if key in ids} for key in by_id}
+    rank_scores = {source['document_id']: source.get('fusion_score', 0) for source in ranked}
+    for _ in range(max_hops):
+        candidates = set()
+        for key in frontier:
+            for code in references[key]:
+                candidates.update(codes.get(code, []))
+            # Inverse links locate policies and minutes which cite a contract/invoice.
+            candidates.update(other for other in by_id if references[other].intersection(identities[key]))
+        candidates.difference_update(selected)
+        ordered = sorted(candidates, key=lambda key: (
+            -len(terms.intersection(tokens(by_id[key].title + ' ' + by_id[key].content))),
+            -rank_scores.get(key, 0), by_id[key].title))
+        frontier = ordered[:max_documents-len(selected)]
+        selected.extend(frontier)
+        if not frontier:
+            break
+    for key in seeds:
+        if key not in selected and len(selected) < max_documents:
+            selected.append(key)
+    result, remaining = [], 24000
+    for key in selected:
+        doc = by_id[key]
+        content = evidence_window(doc.content, query, min(2400, remaining))
+        if not content or remaining < 300:
+            break
+        result.append(dict(document_id=key, title=doc.title, content=content,
+                           source_type='document', retrieval_method='exact' if key in anchors else
+                           'hybrid' if key in seeds[:6] else 'reference'))
+        remaining -= len(content)
+    return result

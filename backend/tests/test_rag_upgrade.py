@@ -8,7 +8,7 @@ def setup(monkeypatch, verdicts):
     monkeypatch.setattr(router, "lexical_search", lambda *a: [source])
     monkeypatch.setattr(router, "vector_search", lambda *a: [])
     monkeypatch.setattr(router, "expand_evidence", lambda q,t,r,f: r)
-    monkeypatch.setattr(router, "complete", AsyncMock(return_value="Failover exceeds 60 seconds [1]"))
+    monkeypatch.setattr(router, "complete", AsyncMock(return_value='{"claims":[{"quote":"Failover must not exceed 60 seconds.","source_id":1,"text":"Failover exceeds 60 seconds"}]}'))
     verifier = AsyncMock(side_effect=verdicts)
     monkeypatch.setattr(router, "verify_answer", verifier)
     return verifier
