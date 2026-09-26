@@ -265,3 +265,17 @@ def test_failed_generation_returns_original_evidence(monkeypatch):
     result=asyncio.run(router.AgenticRAG().ainvoke({"query":"failover","route":"documents"}))
     assert result["answer_mode"] == "extractive"
     assert "Failover must not exceed 60 seconds." in result["final_answer"]
+
+
+def test_unstructured_generation_cannot_bypass_quote_contract(monkeypatch):
+    setup(monkeypatch,[(True,""),(True,"")])
+    monkeypatch.setattr(router,"complete",AsyncMock(return_value="Unstructured unsupported claim [1]"))
+    result=asyncio.run(router.AgenticRAG().ainvoke({"query":"question","route":"documents"}))
+    assert result["answer_mode"] == "extractive"
+    assert "Unstructured unsupported claim" not in result["final_answer"]
+
+
+def test_followup_verification_receives_resolved_query(monkeypatch):
+    verifier=setup(monkeypatch,[(True,"")])
+    asyncio.run(router.AgenticRAG().ainvoke({"query":"Người đó làm cho công ty nào?","history":[{"role":"user","content":"Who integrates Atlas?"}],"route":"documents"}))
+    assert "Atlas" in verifier.call_args.args[0]
