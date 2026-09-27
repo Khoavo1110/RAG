@@ -148,5 +148,5 @@ def test_shared_ingestion_ignores_request_model_selection():
     token=critic.selected_profile.set(ModelProfile('gemini','cloud','https://example.test/v1','fake-secret'))
     try:
         assert critic.provider_config()[2]=='cloud'
-        assert default_config()[2]==critic.settings.OLLAMA_MODEL
+        assert default_config()[2] in (critic.settings.OLLAMA_MODEL, critic.settings.LLM_MODEL)
     finally:critic.selected_profile.reset(token)

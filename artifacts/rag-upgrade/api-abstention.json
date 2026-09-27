@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "response": {
+    "query": "FPT mua GPU c?a NVIDIA bao nhi?u ti?n?",
+    "answer": "Tôi chưa tìm thấy thông tin phù hợp trong tài liệu của không gian này. Bạn có thể tải thêm tài liệu hoặc đặt câu hỏi cụ thể hơn.",
+    "sources": [],
+    "thought_process": [
+      "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+      "Đã hợp nhất thứ hạng vector và văn bản.",
+      "Đã chọn 0 tài liệu gốc, mở rộng tham chiếu tối đa hai bước."
+    ],
+    "conversation_id": "8ff994af-5b90-4486-a224-7efd8c351893"
+  },
+  "persisted_messages": 2,
+  "cross_workspace_status": 404,
+  "cleanup_status": 204
+}

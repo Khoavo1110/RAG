@@ -5,7 +5,23 @@ __pycache__/
 .venv/
 venv/
 env/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.log
+logs/
+
+# Sensitive & Environment Files
 .env
+.env.*
+*.env
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
 
 # Node / Frontend
 node_modules/
@@ -13,7 +29,11 @@ dist/
 build/
 .next/
 
-# Data & OS files
+# Data & Runtime Files
 data/
+.nori-rebuild/
+.understand-anything/
+
+# OS Files
 .DS_Store
 Thumbs.db

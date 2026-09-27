@@ -18,6 +18,14 @@ if sys.platform == "win32":
 # Load env variables into system environment
 load_dotenv(BASE_DIR / ".env")
 
+# Suppress warnings and Neo4j DBMS notification prints
+import warnings
+warnings.filterwarnings("ignore")
+
+import logging
+logging.getLogger("neo4j").setLevel(logging.ERROR)
+logging.getLogger("graphiti_core").setLevel(logging.ERROR)
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -83,9 +91,10 @@ async def handle_ingest(file_path: str, title: str | None, tenant_id: str | None
         except Exception as e:
             console.print(f"\n[bold red]❌ Lỗi trong quá trình nạp tài liệu:[/bold red] {e}")
 
-async def run_query(query_text: str, tenant_id: str | None):
+async def run_query(query_text: str, tenant_id: str | None, close_graph: bool = True):
     init_db()
-    await graph_extractor.initialize()
+    if close_graph:
+        await graph_extractor.initialize()
     
     initial_state = {
         "query": query_text,
@@ -109,8 +118,8 @@ async def run_query(query_text: str, tenant_id: str | None):
     }
 
     try:
-        with Status("[bold yellow]Agent đang suy nghĩ và truy xuất dữ liệu...", console=console) as status:
-            result = await agentic_rag_app.ainvoke(initial_state, config=config)
+        console.print("[bold yellow]⏳ Agent đang suy nghĩ và truy xuất dữ liệu...[/bold yellow]")
+        result = await agentic_rag_app.ainvoke(initial_state, config=config)
         
         # Print Thought Process
         console.print("\n[bold magenta]🧠 QUÁ TRÌNH SUY NGHĨ (THOUGHT PROCESS):[/bold magenta]")
@@ -147,7 +156,8 @@ async def run_query(query_text: str, tenant_id: str | None):
         console.print(f"\n[bold red]❌ Lỗi thực thi Agent RAG:[/bold red] {e}")
     finally:
         db.close()
-        await graph_extractor.close()
+        if close_graph:
+            await graph_extractor.close()
 
 async def handle_chat(tenant_id: str | None):
     show_welcome_banner()
@@ -155,23 +165,28 @@ async def handle_chat(tenant_id: str | None):
     console.print(f"[cyan]ℹ[/cyan] Tenant ID hiện tại: [bold]{tenant_id or 'global'}[/bold]")
     console.print("-" * 50)
     
-    while True:
-        try:
-            query = Prompt.ask("\n[bold blue]Hỏi AI[/bold blue]")
-            if query.strip().lower() in ["exit", "quit"]:
-                console.print("[yellow]Tạm biệt![/yellow]")
+    init_db()
+    await graph_extractor.initialize()
+    try:
+        while True:
+            try:
+                query = await asyncio.to_thread(Prompt.ask, "\n[bold blue]Hỏi AI[/bold blue]")
+                if not query or query.strip().lower() in ["exit", "quit"]:
+                    console.print("[yellow]Tạm biệt![/yellow]")
+                    break
+                    
+                if not query.strip():
+                    continue
+                    
+                await run_query(query, tenant_id, close_graph=False)
+                console.print("-" * 50)
+            except (KeyboardInterrupt, EOFError):
+                console.print("\n[yellow]Tạm biệt![/yellow]")
                 break
-                
-            if not query.strip():
-                continue
-                
-            await run_query(query, tenant_id)
-            console.print("-" * 50)
-        except KeyboardInterrupt:
-            console.print("\n[yellow]Tạm biệt![/yellow]")
-            break
-        except Exception as e:
-            console.print(f"[bold red]Lỗi:[/bold red] {e}")
+            except Exception as e:
+                console.print(f"[bold red]Lỗi:[/bold red] {e}")
+    finally:
+        await graph_extractor.close()
 
 def main():
     parser = argparse.ArgumentParser(description="Agentic RAG 2.0 CLI Tool")

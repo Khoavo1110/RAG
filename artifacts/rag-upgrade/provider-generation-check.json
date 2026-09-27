@@ -1,0 +1,26 @@
+[
+  {
+    "profile": "gemini::gemini-2.5-flash",
+    "generated": true,
+    "json_valid": true,
+    "seconds": 2.55
+  },
+  {
+    "profile": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+    "generated": true,
+    "json_valid": true,
+    "seconds": 2.39
+  },
+  {
+    "profile": "groq::openai/gpt-oss-120b",
+    "generated": true,
+    "json_valid": true,
+    "seconds": 1.2
+  },
+  {
+    "profile": "openrouter::nvidia/nemotron-3-super-120b-a12b:free",
+    "generated": true,
+    "json_valid": false,
+    "seconds": 2.01
+  }
+]

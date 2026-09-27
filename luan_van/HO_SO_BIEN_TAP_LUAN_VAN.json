@@ -1,0 +1,103 @@
+{
+  "edited_at": "2026-09-27",
+  "target": "luan_van/LUAN_VAN_AGENTIC_RAG_2.0_HOAN_CHINH.md",
+  "original_sha256": "93B9AFEE3210B91DDACFE09F81A49E6499C01920D413D212F71F6D66A371CEAD",
+  "scope": "Biên tập luận văn; không sửa mã hoặc chạy benchmark.",
+  "evidence_files": [
+    "artifacts/rag-upgrade/after.json",
+    "artifacts/rag-upgrade/retrieval.json",
+    "artifacts/rag-upgrade/summary.json",
+    "artifacts/rag-upgrade/final-api-check.json",
+    "artifacts/rag-upgrade/evaluate.py",
+    "data/demo-doanh-nghiep/minh-an/README.md",
+    "data/demo-doanh-nghiep/minh-an/evaluation/cases.json",
+    "tests/run_evaluation.py",
+    "tests/evaluation_results.md"
+  ],
+  "observed_source_hashes": {
+    "backend/app/agents/tools.py": "D0788650D575379776342F07A61BBDFBA74CD42FE45DF5955C29E332DF3566A4",
+    "backend/app/agents/router.py": "18D643BC5BBFE7607D562316311A7322FA9E00ABD98E66E9355A685F9493AF87",
+    "backend/app/agents/critic.py": "8E4EDA545A6882FE32A392CF1D722826A3EA96AE62F32D2DF27DF62E3361499D"
+  },
+  "verified_statistics": {
+    "cases": 20,
+    "independent_retrieval_cases": 18,
+    "before_mean": 0.75,
+    "after_mean": 0.9675925925925926,
+    "complete_before": 8,
+    "complete_after": 16,
+    "verified": 0,
+    "extractive": 20,
+    "median_seconds": 27.51,
+    "max_seconds": 111
+  },
+  "references": [
+    {
+      "author": "Asai et al.",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2310.11511"
+    },
+    {
+      "author": "Cormack et al.",
+      "year": 2009,
+      "url": "https://doi.org/10.1145/1571941.1572114",
+      "full_text": "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf"
+    },
+    {
+      "author": "Edge et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2404.16130"
+    },
+    {
+      "author": "Es et al.",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.eacl-demo.16/"
+    },
+    {
+      "author": "Lewis et al.",
+      "year": 2020,
+      "url": "https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html"
+    },
+    {
+      "author": "Rasmussen et al.",
+      "year": 2025,
+      "url": "https://arxiv.org/abs/2501.13956"
+    },
+    {
+      "author": "Yan et al.",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2401.15884"
+    }
+  ],
+  "validation": {
+    "process": "đã rà soát",
+    "mechanical": "passed: six chapters, seven matched references, balanced fences, evidence paths and hashes",
+    "evidence": "đã tính lại JSON",
+    "semantic": "reviewed: architecture and statistics; three wording clarifications applied",
+    "human": "cần bổ sung thông tin bìa và mẫu trường"
+  },
+  "not_performed": [
+    "Chạy lại benchmark/API",
+    "Turnitin",
+    "Dàn trang Word/PDF",
+    "Đồng bộ các tệp chương rời"
+  ],
+  "backup": "LUAN_VAN_AGENTIC_RAG_2.0_BAN_GOC_20260927.md",
+  "edited_sha256": "e99fc816daeb4bccfa331cf66a3a8d43584b554c86368247afa6cc85096343cc",
+  "evidence_sha256": {
+    "artifacts/rag-upgrade/after.json": "9242c09771b185658a9c2ee30947cc5b5f851542c765b9da0b41b9b9bad34e9f",
+    "artifacts/rag-upgrade/retrieval.json": "09a19187860c474ea4a793ef6bcfb16796e3da4179da9363d2c76610133a30f3",
+    "artifacts/rag-upgrade/summary.json": "e4e728a9c28feafe2a4e5e2c1214b822b5ef8ba170584f64f722e2904eca9f70",
+    "artifacts/rag-upgrade/final-api-check.json": "e0ddecb6eb9990320e4f2a9a872f9698237ccd00af2b6bf91455196f98693524",
+    "artifacts/rag-upgrade/evaluate.py": "35257ad39873af8ba75ffcaa4fbff8557914749e903f47952ef9e148a01be787",
+    "data/demo-doanh-nghiep/minh-an/README.md": "c4d86b6104d23ffa2aae20d5d54557d473d2a4fbc073869619dcf26ae927479e",
+    "data/demo-doanh-nghiep/minh-an/evaluation/cases.json": "9fbeab1504ff6019d45c1eb420a381814cd311977c60e49ff21ed5faf6f00886",
+    "tests/run_evaluation.py": "b57124f777f9c65ef83f0be453701c2c2c6711f0d72192a041274aeb59fb13a4",
+    "tests/evaluation_results.md": "e689c554bc337ab97a48eb186f4d5011fa5b28bde8c96f414de3cd1cbc966343"
+  },
+  "source_hashes_at_save": {
+    "backend/app/agents/tools.py": "D0788650D575379776342F07A61BBDFBA74CD42FE45DF5955C29E332DF3566A4",
+    "backend/app/agents/router.py": "18D643BC5BBFE7607D562316311A7322FA9E00ABD98E66E9355A685F9493AF87",
+    "backend/app/agents/critic.py": "8E4EDA545A6882FE32A392CF1D722826A3EA96AE62F32D2DF27DF62E3361499D"
+  }
+}

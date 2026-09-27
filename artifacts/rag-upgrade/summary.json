@@ -1,0 +1,14 @@
+{
+  "cases": 20,
+  "modes": {
+    "verified": 0,
+    "extractive": 20,
+    "no_evidence": 0
+  },
+  "retrieval_cases": 18,
+  "lexical_baseline_mean_source_recall": 0.75,
+  "expanded_mean_source_recall": 0.9675925925925927,
+  "median_seconds": 27.509999999999998,
+  "max_seconds": 111.0,
+  "note": "20-case batch used the candidate snapshot before final timeout limits, quote-bypass guard, fallback rendering and acronym abstention. Final live API checks cover T03/T06/T19. Recall uses lexical-only retrieval and different budgets: six chunks versus up to twelve documents; it is not answer accuracy."
+}

@@ -1,0 +1,721 @@
+{
+  "catalog": {
+    "profiles": [
+      {
+        "id": "ollama::qwen2.5:3b",
+        "provider": "ollama",
+        "model": "qwen2.5:3b",
+        "label": "Ollama Local",
+        "mode": "local",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "ollama::qwen2.5:3b-hermes",
+        "provider": "ollama",
+        "model": "qwen2.5:3b-hermes",
+        "label": "Ollama Local",
+        "mode": "local",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "ollama::mistral:latest",
+        "provider": "ollama",
+        "model": "mistral:latest",
+        "label": "Ollama Local",
+        "mode": "local",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "ollama::phi3:latest",
+        "provider": "ollama",
+        "model": "phi3:latest",
+        "label": "Ollama Local",
+        "mode": "local",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "gemini::gemini-2.5-flash",
+        "provider": "gemini",
+        "model": "gemini-2.5-flash",
+        "label": "Google Gemini",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+        "provider": "nvidia",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "nvidia::nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "nvidia",
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "nvidia::nvidia/nemotron-3.5-lightning-30b-a3b",
+        "provider": "nvidia",
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "nvidia::google/gemma-4-31b-it",
+        "provider": "nvidia",
+        "model": "google/gemma-4-31b-it",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "nvidia::minimaxai/minimax-m3",
+        "provider": "nvidia",
+        "model": "minimaxai/minimax-m3",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": false,
+        "status": "unlisted"
+      },
+      {
+        "id": "nvidia::meta/llama-3.2-11b-vision-instruct",
+        "provider": "nvidia",
+        "model": "meta/llama-3.2-11b-vision-instruct",
+        "label": "NVIDIA NIM",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "groq::qwen/qwen3.6-27b",
+        "provider": "groq",
+        "model": "qwen/qwen3.6-27b",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": false,
+        "status": "unlisted"
+      },
+      {
+        "id": "groq::qwen/qwen3.8-27b",
+        "provider": "groq",
+        "model": "qwen/qwen3.8-27b",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "groq::openai/gpt-oss-120b",
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "groq::openai/gpt-oss-20b",
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "groq::groq/compound",
+        "provider": "groq",
+        "model": "groq/compound",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": false,
+        "status": "unlisted"
+      },
+      {
+        "id": "groq::groq/compound-mini",
+        "provider": "groq",
+        "model": "groq/compound-mini",
+        "label": "Groq",
+        "mode": "api",
+        "configured": true,
+        "available": false,
+        "status": "unlisted"
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3-super-120b-a12b:free",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-super-120b-a12b:free",
+        "label": "OpenRouter",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3.5-lightning:free",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3.5-lightning:free",
+        "label": "OpenRouter",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3-ultra-550b-a55b:free",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+        "label": "OpenRouter",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "label": "OpenRouter",
+        "mode": "api",
+        "configured": true,
+        "available": true,
+        "status": "listed"
+      },
+      {
+        "id": "openrouter::minimax/minimax-m3:free",
+        "provider": "openrouter",
+        "model": "minimax/minimax-m3:free",
+        "label": "OpenRouter",
+        "mode": "api",
+        "configured": true,
+        "available": false,
+        "status": "unlisted"
+      }
+    ],
+    "local_default_id": "ollama::qwen2.5:3b",
+    "api_default_id": "gemini::gemini-2.5-flash"
+  },
+  "results": [
+    {
+      "case": "T03",
+      "profile": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+      "status": 200,
+      "seconds": 87.25,
+      "response": {
+        "query": "Ngân sách Atlas tăng bao nhiêu, chia cho nhà cung cấp nào, và ai phê duyệt cuối?",
+        "answer": "Tôi chưa xác nhận được bản tổng hợp. Các đoạn bằng chứng gốc liên quan:\n\n**[1] PRJ-AT-01 | Điều lệ dự án Atlas**\n\n> # PRJ-AT-01 | Điều lệ dự án Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> ATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\n> Điều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\n> Đầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n\n**[2] FIN-BUD-03 | Ngân sách cơ sở Atlas**\n\n> # FIN-BUD-03 | Ngân sách cơ sở Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Ngân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\n> Tất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\n> CR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n\n**[3] NCC-VH-06 | Hạ tầng Vân Hải Cloud**\n\n> # NCC-VH-06 | Hạ tầng Vân Hải Cloud\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Vân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\n> CR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\n> Lantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n\n**[4] CR-07 | Thay đổi được duyệt ngày 18/09**\n\n> # CR-07 | Thay đổi được duyệt ngày 18/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> CR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\n> Ngân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\n> Mốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n\n**[5] FIN-POL-01 | Phê duyệt ngân sách và thanh toán**\n\n> # FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Quy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\n> Thanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\n> Một biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n\n**[6] MA-HR-02 | Danh bạ và trách nhiệm**\n\n> # MA-HR-02 | Danh bạ và trách nhiệm\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Nguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\n> Phạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\n> Trần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n\n**[7] STEER-09 | Ban chỉ đạo ngày 22/09**\n\n> # STEER-09 | Ban chỉ đạo ngày 22/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Cuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\n> Quyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\n> Mai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n\n**[8] NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số**\n\n> # NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Kết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\n> Phụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\n> Hoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.",
+        "sources": [
+          {
+            "document_id": "f1b2b751-887f-4264-a8c9-95aba16d9938",
+            "title": "PRJ-AT-01 | Điều lệ dự án Atlas",
+            "content": "# PRJ-AT-01 | Điều lệ dự án Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\nĐiều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\nĐầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "0393ed03-9935-4794-9510-c33c4b8b2f91",
+            "title": "FIN-BUD-03 | Ngân sách cơ sở Atlas",
+            "content": "# FIN-BUD-03 | Ngân sách cơ sở Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNgân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\nTất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\nCR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "cd364f50-70cf-4b07-ae52-23140862deb8",
+            "title": "NCC-VH-06 | Hạ tầng Vân Hải Cloud",
+            "content": "# NCC-VH-06 | Hạ tầng Vân Hải Cloud\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nVân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\nCR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\nLantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "a91e0e87-856d-45c4-9455-71afb6917140",
+            "title": "CR-07 | Thay đổi được duyệt ngày 18/09",
+            "content": "# CR-07 | Thay đổi được duyệt ngày 18/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\nNgân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\nMốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "f1044718-2e98-4c47-8a31-cba4e2a6d0cb",
+            "title": "FIN-POL-01 | Phê duyệt ngân sách và thanh toán",
+            "content": "# FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nQuy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\nThanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\nMột biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "4fbcd825-c038-41e4-bf69-0a29428d1672",
+            "title": "MA-HR-02 | Danh bạ và trách nhiệm",
+            "content": "# MA-HR-02 | Danh bạ và trách nhiệm\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\nPhạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\nTrần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "57286776-7993-433b-bfb2-e40ca49a170b",
+            "title": "STEER-09 | Ban chỉ đạo ngày 22/09",
+            "content": "# STEER-09 | Ban chỉ đạo ngày 22/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\nQuyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\nMai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "8bcf00af-7c2e-4d66-8859-0507f10623f7",
+            "title": "NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số",
+            "content": "# NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nKết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\nPhụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\nHoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "e4961927-c5a2-4030-ae54-20385e74be44",
+            "title": "MA-ORG-01 | Tổng quan Minh An Supply",
+            "content": "# MA-ORG-01 | Tổng quan Minh An Supply\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nMinh An Supply là doanh nghiệp hư cấu trong bộ dữ liệu thử nghiệm Nori, cung cấp dịch vụ kho vận và phần mềm điều phối đơn hàng cho khách hàng bán lẻ. Công ty có văn phòng tại TP.HCM và hai kho mang mã WH-HCM-01 và WH-BD-02. Dữ liệu chốt đến hết ngày 25/09/2026; mọi con người, đối tác và giao dịch trong bộ hồ sơ đều giả lập.\nNguyễn Linh là Tổng giám đốc, Trần Mai là Giám đốc tài chính, Lê Quang là Giám đốc công nghệ. Dự án ATLAS-26 thay thế công cụ điều phối đơn hàng cũ. Dự án LANTERN-26 xây cổng theo dõi giao hàng cho khách hàng. Hai dự án dùng chung dịch vụ danh tính ID-GATE và cụm dữ liệu ORD-HUB, nhưng có ngân sách và quản lý dự án riêng.\nKhách hàng An Phú Retail dùng cả hai kho. Hợp đồng KH-AP-2026 quy định dịch vụ cho khách hàng này. Sơ đồ trách nhiệm chi tiết nằm ở MA-HR-02; ngân sách Atlas nằm ở FIN-BUD-03. Không suy diễn rằng Minh An Supply có quan hệ với một doanh nghiệp có tên giống trong thực tế.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "24f63a94-2848-41b6-b76e-07f78c8e7fa7",
+            "title": "SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE",
+            "content": "# SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nSEC-CTRL-04 được Bùi Khánh lập ngày 13/09/2026 sau INC-0912. Lê Quang triển khai TTL bộ đệm token 10 phút; token truy cập vẫn hết hạn sau 15 phút theo SPEC-API-04. Hai thời hạn có mục đích khác nhau và không được hoán đổi khi trả lời.\nKiểm thử thu hồi refresh token do Bùi Khánh xác nhận; chạy hồi quy Atlas do Phạm Huy theo dõi; chạy hồi quy Lantern do Mai Vy theo dõi. Hạn đóng kiểm soát là 29/09/2026. Tại bản cập nhật 25/09, TTL 10 phút đã triển khai staging, nhưng kiểm thử thu hồi refresh token còn chờ bằng chứng. Trạng thái tổng là đang mở.\nChi phí kiểm thử dùng khoản bảo mật 160 triệu trong FIN-BUD-03, không có phần tăng ngân sách riêng. STEER-09 yêu cầu đóng SEC-CTRL-04 trước vận hành Atlas và trước chạy thử Lantern. Việc đã rollback INC-0912 không đồng nghĩa toàn bộ hành động phòng ngừa đã hoàn thành.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "85cbc07b-e5f3-43b4-9244-880ac189cf44",
+            "title": "FIN-FORECAST-09 | Dự báo chi phí ngày 25/09",
+            "content": "# FIN-FORECAST-09 | Dự báo chi phí ngày 25/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nFIN-FORECAST-09 do Trần Mai ký ngày 25/09/2026 ghi tổng ngân sách Atlas hiện hành 2.580 triệu đồng chưa VAT: nội bộ 700, Kết Nối Số 520, Vân Hải Cloud 480, Bắc Sao Tech 720, bảo mật 160. Báo cáo đã gồm CR-07; cộng thêm 180 vào 2.580 là đếm trùng.\nNgân sách Lantern riêng là 900 triệu chưa VAT theo PRJ-LN-02. Tổng ngân sách được duyệt cho hai dự án Atlas và Lantern là 3.480 triệu chưa VAT. Đây là tổng ngân sách, không phải số thực chi và không phải doanh thu công ty. Phân bổ đám mây hai dự án cộng lại là 780 triệu chưa VAT, gồm Atlas 480 và Lantern 300.\nTrong hồ sơ chi tiết thiết bị, PAY-041 xác nhận đã trả 396 triệu có VAT giả định; INV-BS-042 còn 396 triệu có VAT chưa trả. Chưa có đủ chứng từ thực chi cho toàn bộ năm khoản Atlas nên không tính được tỷ lệ giải ngân toàn dự án. Báo cáo chưa chứa doanh thu, lợi nhuận hoặc lương từng nhân viên.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "aa949997-6715-430a-a4fd-d546cbdac6d5",
+            "title": "PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern",
+            "content": "# PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nLANTERN-26, tên gọi Lantern, là cổng khách hàng của Minh An Supply do Mai Vy quản lý, ngân sách riêng 900 triệu đồng chưa VAT. Cơ cấu Lantern: giao diện và dịch vụ 500 triệu, phân bổ đám mây 300 triệu, đào tạo khách hàng 100 triệu. Ngân sách này không nằm trong 2.580 triệu của Atlas.\nLantern dùng ID-GATE để đăng nhập và nhận trạng thái đơn từ ORD-HUB. Khách hàng thử nghiệm đầu tiên là An Phú Retail, người nghiệm thu khách hàng là Hà Chi. Bản giao tiếp yêu cầu API 1.3 với customer_order_ref, nên Lantern phụ thuộc bản tích hợp của Kết Nối Số trong NCC-KNS-05.\nMốc chạy thử khách hàng của Lantern là 24/10/2026, có điều kiện Atlas đã vận hành ổn định từ 21/10 và đã đóng kiểm soát SEC-CTRL-04. Mốc 24/10 là chạy thử Lantern, không phải ngày vận hành Atlas. CR-07 không tăng ngân sách Lantern. Nếu BUG-17 chưa đóng làm Atlas bị giữ cổng nghiệm thu, Mai Vy phải đánh giá lại lịch chạy thử; tại ngày chốt chưa có quyết định đổi 24/10.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          }
+        ],
+        "thought_process": [
+          "Mô hình sử dụng: NVIDIA NIM · nvidia/nemotron-3-super-120b-a12b.",
+          "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+          "Đã hợp nhất thứ hạng vector và văn bản.",
+          "Đã chọn 12 tài liệu gốc, mở rộng tham chiếu tối đa hai bước.",
+          "Tổng hợp câu trả lời với trích dẫn từng nhận định.",
+          "Phát hiện lỗi hoặc trích dẫn không hợp lệ; hiệu chỉnh và kiểm chứng lại.",
+          "Bản sửa chưa đạt kiểm chứng; chuyển sang trích nguyên văn bằng chứng."
+        ],
+        "conversation_id": "fae88e43-c286-4111-a995-e9f5a49a2aff",
+        "model_used": {
+          "id": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+          "provider": "nvidia",
+          "model": "nvidia/nemotron-3-super-120b-a12b",
+          "label": "NVIDIA NIM",
+          "mode": "api",
+          "configured": true
+        },
+        "answer_mode": "extractive",
+        "failure_reason": "Mô hình đã chọn chưa trả được nội dung hợp lệ."
+      }
+    },
+    {
+      "case": "T03",
+      "profile": "gemini::gemini-2.5-flash",
+      "status": 200,
+      "seconds": 22.08,
+      "response": {
+        "query": "Ngân sách Atlas tăng bao nhiêu, chia cho nhà cung cấp nào, và ai phê duyệt cuối?",
+        "answer": "Tôi chưa xác nhận được bản tổng hợp. Các đoạn bằng chứng gốc liên quan:\n\n**[1] PRJ-AT-01 | Điều lệ dự án Atlas**\n\n> # PRJ-AT-01 | Điều lệ dự án Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> ATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\n> Điều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\n> Đầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n\n**[2] FIN-BUD-03 | Ngân sách cơ sở Atlas**\n\n> # FIN-BUD-03 | Ngân sách cơ sở Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Ngân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\n> Tất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\n> CR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n\n**[3] NCC-VH-06 | Hạ tầng Vân Hải Cloud**\n\n> # NCC-VH-06 | Hạ tầng Vân Hải Cloud\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Vân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\n> CR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\n> Lantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n\n**[4] CR-07 | Thay đổi được duyệt ngày 18/09**\n\n> # CR-07 | Thay đổi được duyệt ngày 18/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> CR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\n> Ngân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\n> Mốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n\n**[5] FIN-POL-01 | Phê duyệt ngân sách và thanh toán**\n\n> # FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Quy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\n> Thanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\n> Một biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n\n**[6] MA-HR-02 | Danh bạ và trách nhiệm**\n\n> # MA-HR-02 | Danh bạ và trách nhiệm\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Nguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\n> Phạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\n> Trần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n\n**[7] STEER-09 | Ban chỉ đạo ngày 22/09**\n\n> # STEER-09 | Ban chỉ đạo ngày 22/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Cuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\n> Quyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\n> Mai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n\n**[8] NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số**\n\n> # NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Kết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\n> Phụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\n> Hoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.",
+        "sources": [
+          {
+            "document_id": "f1b2b751-887f-4264-a8c9-95aba16d9938",
+            "title": "PRJ-AT-01 | Điều lệ dự án Atlas",
+            "content": "# PRJ-AT-01 | Điều lệ dự án Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\nĐiều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\nĐầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "0393ed03-9935-4794-9510-c33c4b8b2f91",
+            "title": "FIN-BUD-03 | Ngân sách cơ sở Atlas",
+            "content": "# FIN-BUD-03 | Ngân sách cơ sở Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNgân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\nTất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\nCR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "cd364f50-70cf-4b07-ae52-23140862deb8",
+            "title": "NCC-VH-06 | Hạ tầng Vân Hải Cloud",
+            "content": "# NCC-VH-06 | Hạ tầng Vân Hải Cloud\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nVân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\nCR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\nLantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "a91e0e87-856d-45c4-9455-71afb6917140",
+            "title": "CR-07 | Thay đổi được duyệt ngày 18/09",
+            "content": "# CR-07 | Thay đổi được duyệt ngày 18/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\nNgân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\nMốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "f1044718-2e98-4c47-8a31-cba4e2a6d0cb",
+            "title": "FIN-POL-01 | Phê duyệt ngân sách và thanh toán",
+            "content": "# FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nQuy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\nThanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\nMột biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "4fbcd825-c038-41e4-bf69-0a29428d1672",
+            "title": "MA-HR-02 | Danh bạ và trách nhiệm",
+            "content": "# MA-HR-02 | Danh bạ và trách nhiệm\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\nPhạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\nTrần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "57286776-7993-433b-bfb2-e40ca49a170b",
+            "title": "STEER-09 | Ban chỉ đạo ngày 22/09",
+            "content": "# STEER-09 | Ban chỉ đạo ngày 22/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\nQuyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\nMai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "8bcf00af-7c2e-4d66-8859-0507f10623f7",
+            "title": "NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số",
+            "content": "# NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nKết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\nPhụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\nHoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "e4961927-c5a2-4030-ae54-20385e74be44",
+            "title": "MA-ORG-01 | Tổng quan Minh An Supply",
+            "content": "# MA-ORG-01 | Tổng quan Minh An Supply\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nMinh An Supply là doanh nghiệp hư cấu trong bộ dữ liệu thử nghiệm Nori, cung cấp dịch vụ kho vận và phần mềm điều phối đơn hàng cho khách hàng bán lẻ. Công ty có văn phòng tại TP.HCM và hai kho mang mã WH-HCM-01 và WH-BD-02. Dữ liệu chốt đến hết ngày 25/09/2026; mọi con người, đối tác và giao dịch trong bộ hồ sơ đều giả lập.\nNguyễn Linh là Tổng giám đốc, Trần Mai là Giám đốc tài chính, Lê Quang là Giám đốc công nghệ. Dự án ATLAS-26 thay thế công cụ điều phối đơn hàng cũ. Dự án LANTERN-26 xây cổng theo dõi giao hàng cho khách hàng. Hai dự án dùng chung dịch vụ danh tính ID-GATE và cụm dữ liệu ORD-HUB, nhưng có ngân sách và quản lý dự án riêng.\nKhách hàng An Phú Retail dùng cả hai kho. Hợp đồng KH-AP-2026 quy định dịch vụ cho khách hàng này. Sơ đồ trách nhiệm chi tiết nằm ở MA-HR-02; ngân sách Atlas nằm ở FIN-BUD-03. Không suy diễn rằng Minh An Supply có quan hệ với một doanh nghiệp có tên giống trong thực tế.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "24f63a94-2848-41b6-b76e-07f78c8e7fa7",
+            "title": "SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE",
+            "content": "# SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nSEC-CTRL-04 được Bùi Khánh lập ngày 13/09/2026 sau INC-0912. Lê Quang triển khai TTL bộ đệm token 10 phút; token truy cập vẫn hết hạn sau 15 phút theo SPEC-API-04. Hai thời hạn có mục đích khác nhau và không được hoán đổi khi trả lời.\nKiểm thử thu hồi refresh token do Bùi Khánh xác nhận; chạy hồi quy Atlas do Phạm Huy theo dõi; chạy hồi quy Lantern do Mai Vy theo dõi. Hạn đóng kiểm soát là 29/09/2026. Tại bản cập nhật 25/09, TTL 10 phút đã triển khai staging, nhưng kiểm thử thu hồi refresh token còn chờ bằng chứng. Trạng thái tổng là đang mở.\nChi phí kiểm thử dùng khoản bảo mật 160 triệu trong FIN-BUD-03, không có phần tăng ngân sách riêng. STEER-09 yêu cầu đóng SEC-CTRL-04 trước vận hành Atlas và trước chạy thử Lantern. Việc đã rollback INC-0912 không đồng nghĩa toàn bộ hành động phòng ngừa đã hoàn thành.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "85cbc07b-e5f3-43b4-9244-880ac189cf44",
+            "title": "FIN-FORECAST-09 | Dự báo chi phí ngày 25/09",
+            "content": "# FIN-FORECAST-09 | Dự báo chi phí ngày 25/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nFIN-FORECAST-09 do Trần Mai ký ngày 25/09/2026 ghi tổng ngân sách Atlas hiện hành 2.580 triệu đồng chưa VAT: nội bộ 700, Kết Nối Số 520, Vân Hải Cloud 480, Bắc Sao Tech 720, bảo mật 160. Báo cáo đã gồm CR-07; cộng thêm 180 vào 2.580 là đếm trùng.\nNgân sách Lantern riêng là 900 triệu chưa VAT theo PRJ-LN-02. Tổng ngân sách được duyệt cho hai dự án Atlas và Lantern là 3.480 triệu chưa VAT. Đây là tổng ngân sách, không phải số thực chi và không phải doanh thu công ty. Phân bổ đám mây hai dự án cộng lại là 780 triệu chưa VAT, gồm Atlas 480 và Lantern 300.\nTrong hồ sơ chi tiết thiết bị, PAY-041 xác nhận đã trả 396 triệu có VAT giả định; INV-BS-042 còn 396 triệu có VAT chưa trả. Chưa có đủ chứng từ thực chi cho toàn bộ năm khoản Atlas nên không tính được tỷ lệ giải ngân toàn dự án. Báo cáo chưa chứa doanh thu, lợi nhuận hoặc lương từng nhân viên.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "aa949997-6715-430a-a4fd-d546cbdac6d5",
+            "title": "PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern",
+            "content": "# PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nLANTERN-26, tên gọi Lantern, là cổng khách hàng của Minh An Supply do Mai Vy quản lý, ngân sách riêng 900 triệu đồng chưa VAT. Cơ cấu Lantern: giao diện và dịch vụ 500 triệu, phân bổ đám mây 300 triệu, đào tạo khách hàng 100 triệu. Ngân sách này không nằm trong 2.580 triệu của Atlas.\nLantern dùng ID-GATE để đăng nhập và nhận trạng thái đơn từ ORD-HUB. Khách hàng thử nghiệm đầu tiên là An Phú Retail, người nghiệm thu khách hàng là Hà Chi. Bản giao tiếp yêu cầu API 1.3 với customer_order_ref, nên Lantern phụ thuộc bản tích hợp của Kết Nối Số trong NCC-KNS-05.\nMốc chạy thử khách hàng của Lantern là 24/10/2026, có điều kiện Atlas đã vận hành ổn định từ 21/10 và đã đóng kiểm soát SEC-CTRL-04. Mốc 24/10 là chạy thử Lantern, không phải ngày vận hành Atlas. CR-07 không tăng ngân sách Lantern. Nếu BUG-17 chưa đóng làm Atlas bị giữ cổng nghiệm thu, Mai Vy phải đánh giá lại lịch chạy thử; tại ngày chốt chưa có quyết định đổi 24/10.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          }
+        ],
+        "thought_process": [
+          "Mô hình sử dụng: Google Gemini · gemini-2.5-flash.",
+          "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+          "Đã hợp nhất thứ hạng vector và văn bản.",
+          "Đã chọn 12 tài liệu gốc, mở rộng tham chiếu tối đa hai bước.",
+          "Tổng hợp câu trả lời với trích dẫn từng nhận định.",
+          "Phát hiện lỗi hoặc trích dẫn không hợp lệ; hiệu chỉnh và kiểm chứng lại.",
+          "Bản sửa chưa đạt kiểm chứng; chuyển sang trích nguyên văn bằng chứng."
+        ],
+        "conversation_id": "9f61ce5d-f348-4f25-b9a4-94cf0f86903d",
+        "model_used": {
+          "id": "gemini::gemini-2.5-flash",
+          "provider": "gemini",
+          "model": "gemini-2.5-flash",
+          "label": "Google Gemini",
+          "mode": "api",
+          "configured": true
+        },
+        "answer_mode": "extractive",
+        "failure_reason": "Provider đang giới hạn tần suất hoặc quota (429)."
+      }
+    },
+    {
+      "case": "T06",
+      "profile": "gemini::gemini-2.5-flash",
+      "status": 200,
+      "seconds": 10.72,
+      "response": {
+        "query": "Vì sao INV-BS-042 chưa thanh toán? Ai phải làm gì để khoản tiền được giải ngân?",
+        "answer": "Tôi chưa xác nhận được bản tổng hợp. Các đoạn bằng chứng gốc liên quan:\n\n**[1] INV-BS-042 | Hóa đơn đợt hai đang giữ thanh toán**\n\n> # INV-BS-042 | Hóa đơn đợt hai đang giữ thanh toán\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> INV-BS-042 phát hành ngày 21/09/2026, giá trị 360 triệu đồng chưa VAT, VAT giả định 36 triệu và tổng phải trả 396 triệu. Hóa đơn liên quan đợt hai của NCC-BS-09 với Bắc Sao Tech.\n> Tại ngày chốt 25/09/2026 chưa thanh toán INV-BS-042. Lý do là ACC-BS-08 chưa xác nhận nghiệm thu hoàn tất: tình huống failover của bộ lưu trữ còn lỗi S1 tên BUG-17. Không có phiếu chi PAY-042 trong bộ dữ liệu. Không được suy diễn rằng INV-BS-042 đã trả chỉ vì hóa đơn đã được phát hành.\n> Vũ Anh giữ hồ sơ thanh toán, Minh Phúc phải gửi bằng chứng sửa BUG-17, Đỗ Thảo chứng kiến kiểm thử lại và Lê Quang xác nhận kỹ thuật trước khi đề nghị Trần Mai chi tiền. Số công nợ hợp đồng còn lại là 360 triệu chưa VAT, tương đương 396 triệu có VAT giả định. Hồ sơ chưa quyết định phạt chậm nghiệm thu hay ngày thanh toán đợt hai.\n\n**[2] INV-BS-041 | Hóa đơn và thanh toán đợt một**\n\n> # INV-BS-041 | Hóa đơn và thanh toán đợt một\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> INV-BS-041 do Bắc Sao Tech phát hành ngày 29/08/2026 cho mốc giao thiết bị của NCC-BS-09. Giá chưa VAT 360 triệu đồng; VAT giả định 10% là 36 triệu; tổng phải trả 396 triệu đồng. Phiếu giao DEL-BS-03 xác nhận hai máy chủ và một bộ lưu trữ tới WH-HCM-01 ngày 28/08/2026.\n> Vũ Anh kiểm tra hợp đồng và phiếu giao; Đỗ Thảo xác nhận thiết bị đã nhận; Trần Mai duyệt thanh toán. Phiếu chi PAY-041 ngày 02/09/2026 xác nhận Minh An Supply đã chuyển đủ 396 triệu đồng cho Bắc Sao Tech. Không có khoản tạm ứng khác ngoài đợt một trong bộ hồ sơ này.\n> PAY-041 chỉ chứng minh đã thanh toán đợt một, không chứng minh hoàn thành toàn bộ hợp đồng. Đối chiếu công nợ còn lại cần đọc INV-BS-042 và ACC-BS-08. Khi báo cáo ngân sách chưa VAT, chi phí ghi nhận theo hóa đơn đợt một là 360 triệu; không lấy 396 triệu làm số chưa VAT.\n\n**[3] NCC-BS-09 | Hợp đồng Bắc Sao Tech**\n\n> # NCC-BS-09 | Hợp đồng Bắc Sao Tech\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Minh An Supply ký NCC-BS-09 với Bắc Sao Tech ngày 20/07/2026, giá trị 720 triệu đồng chưa VAT, gồm hai máy chủ xử lý và một bộ lưu trữ cho ATLAS-26. Minh Phúc là đầu mối kỹ thuật bên Bắc Sao Tech; Vũ Anh là đầu mối mua sắm bên Minh An Supply.\n> Thanh toán đợt một 50% sau giao thiết bị tương ứng 360 triệu chưa VAT. Đợt hai 50% sau nghiệm thu hoàn tất tương ứng 360 triệu chưa VAT. VAT giả định trong bộ dữ liệu là 10%, nên mỗi đợt phải chi 396 triệu nếu đủ hồ sơ. VAT này là giả định dữ liệu, không phải hướng dẫn thuế thực tế.\n> Thiết bị giao tới kho WH-HCM-01 ngày 28/08/2026. Hóa đơn đợt một là INV-BS-041, phiếu chi là PAY-041. Đợt hai dùng INV-BS-042; biên bản ACC-BS-08 ngày 20/09 mới nghiệm thu có điều kiện vì kiểm thử failover chưa đạt. Hợp đồng không cho phép trả đợt hai chỉ dựa trên việc đã giao thiết bị. Không có điều khoản tỷ lệ phạt trong bộ hồ sơ cung cấp.\n\n**[4] FIN-POL-01 | Phê duyệt ngân sách và thanh toán**\n\n> # FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Quy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\n> Thanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\n> Một biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n\n**[5] STEER-09 | Ban chỉ đạo ngày 22/09**\n\n> # STEER-09 | Ban chỉ đạo ngày 22/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Cuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\n> Quyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\n> Mai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n\n**[6] FIN-FORECAST-09 | Dự báo chi phí ngày 25/09**\n\n> # FIN-FORECAST-09 | Dự báo chi phí ngày 25/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> FIN-FORECAST-09 do Trần Mai ký ngày 25/09/2026 ghi tổng ngân sách Atlas hiện hành 2.580 triệu đồng chưa VAT: nội bộ 700, Kết Nối Số 520, Vân Hải Cloud 480, Bắc Sao Tech 720, bảo mật 160. Báo cáo đã gồm CR-07; cộng thêm 180 vào 2.580 là đếm trùng.\n> Ngân sách Lantern riêng là 900 triệu chưa VAT theo PRJ-LN-02. Tổng ngân sách được duyệt cho hai dự án Atlas và Lantern là 3.480 triệu chưa VAT. Đây là tổng ngân sách, không phải số thực chi và không phải doanh thu công ty. Phân bổ đám mây hai dự án cộng lại là 780 triệu chưa VAT, gồm Atlas 480 và Lantern 300.\n> Trong hồ sơ chi tiết thiết bị, PAY-041 xác nhận đã trả 396 triệu có VAT giả định; INV-BS-042 còn 396 triệu có VAT chưa trả. Chưa có đủ chứng từ thực chi cho toàn bộ năm khoản Atlas nên không tính được tỷ lệ giải ngân toàn dự án. Báo cáo chưa chứa doanh thu, lợi nhuận hoặc lương từng nhân viên.\n\n**[7] ACC-BS-08 | Nghiệm thu thiết bị có điều kiện**\n\n> # ACC-BS-08 | Nghiệm thu thiết bị có điều kiện\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> ACC-BS-08 lập ngày 20/09/2026 bởi Đỗ Thảo, Lê Quang và Minh Phúc cho NCC-BS-09. Hai máy chủ đạt kiểm thử tải; bộ lưu trữ chưa đạt tình huống chuyển sang nút dự phòng trong 60 giây. Mã lỗi BUG-17, mức S1, làm kiểm thử failover kéo dài 145 giây.\n> Biên bản có trạng thái nghiệm thu có điều kiện, chưa phải nghiệm thu hoàn tất. Minh Phúc chịu trách nhiệm bản firmware sửa lỗi; hạn gửi bản sửa là 27/09/2026. Lê Quang duyệt kịch bản kiểm thử lại, Đỗ Thảo chủ trì buổi thử vào 28/09/2026. Tại ngày chốt 25/09 chưa có kết quả buổi thử này.\n> Điều kiện để thanh toán INV-BS-042 là có biên bản bổ sung xác nhận BUG-17 đã khắc phục và failover không quá 60 giây. Điều kiện đưa Atlas vào vận hành còn cần UAT-AT-06 và SEC-CTRL-04; đạt nghiệm thu thiết bị đơn lẻ chưa đủ. Không được dùng việc kho nhận thiết bị ngày 28/08 làm bằng chứng đạt failover.\n\n**[8] FIN-BUD-03 | Ngân sách cơ sở Atlas**\n\n> # FIN-BUD-03 | Ngân sách cơ sở Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Ngân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\n> Tất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\n> CR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.",
+        "sources": [
+          {
+            "document_id": "751cb947-7099-45c7-9a3b-2d5148efce6e",
+            "title": "INV-BS-042 | Hóa đơn đợt hai đang giữ thanh toán",
+            "content": "# INV-BS-042 | Hóa đơn đợt hai đang giữ thanh toán\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nINV-BS-042 phát hành ngày 21/09/2026, giá trị 360 triệu đồng chưa VAT, VAT giả định 36 triệu và tổng phải trả 396 triệu. Hóa đơn liên quan đợt hai của NCC-BS-09 với Bắc Sao Tech.\nTại ngày chốt 25/09/2026 chưa thanh toán INV-BS-042. Lý do là ACC-BS-08 chưa xác nhận nghiệm thu hoàn tất: tình huống failover của bộ lưu trữ còn lỗi S1 tên BUG-17. Không có phiếu chi PAY-042 trong bộ dữ liệu. Không được suy diễn rằng INV-BS-042 đã trả chỉ vì hóa đơn đã được phát hành.\nVũ Anh giữ hồ sơ thanh toán, Minh Phúc phải gửi bằng chứng sửa BUG-17, Đỗ Thảo chứng kiến kiểm thử lại và Lê Quang xác nhận kỹ thuật trước khi đề nghị Trần Mai chi tiền. Số công nợ hợp đồng còn lại là 360 triệu chưa VAT, tương đương 396 triệu có VAT giả định. Hồ sơ chưa quyết định phạt chậm nghiệm thu hay ngày thanh toán đợt hai.\n",
+            "source_type": "document",
+            "retrieval_method": "exact"
+          },
+          {
+            "document_id": "06c67226-d9e4-4114-8c2d-6586aa1a4924",
+            "title": "INV-BS-041 | Hóa đơn và thanh toán đợt một",
+            "content": "# INV-BS-041 | Hóa đơn và thanh toán đợt một\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nINV-BS-041 do Bắc Sao Tech phát hành ngày 29/08/2026 cho mốc giao thiết bị của NCC-BS-09. Giá chưa VAT 360 triệu đồng; VAT giả định 10% là 36 triệu; tổng phải trả 396 triệu đồng. Phiếu giao DEL-BS-03 xác nhận hai máy chủ và một bộ lưu trữ tới WH-HCM-01 ngày 28/08/2026.\nVũ Anh kiểm tra hợp đồng và phiếu giao; Đỗ Thảo xác nhận thiết bị đã nhận; Trần Mai duyệt thanh toán. Phiếu chi PAY-041 ngày 02/09/2026 xác nhận Minh An Supply đã chuyển đủ 396 triệu đồng cho Bắc Sao Tech. Không có khoản tạm ứng khác ngoài đợt một trong bộ hồ sơ này.\nPAY-041 chỉ chứng minh đã thanh toán đợt một, không chứng minh hoàn thành toàn bộ hợp đồng. Đối chiếu công nợ còn lại cần đọc INV-BS-042 và ACC-BS-08. Khi báo cáo ngân sách chưa VAT, chi phí ghi nhận theo hóa đơn đợt một là 360 triệu; không lấy 396 triệu làm số chưa VAT.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "cd1fd0ec-d4f9-4c99-8cef-9565165053ba",
+            "title": "NCC-BS-09 | Hợp đồng Bắc Sao Tech",
+            "content": "# NCC-BS-09 | Hợp đồng Bắc Sao Tech\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nMinh An Supply ký NCC-BS-09 với Bắc Sao Tech ngày 20/07/2026, giá trị 720 triệu đồng chưa VAT, gồm hai máy chủ xử lý và một bộ lưu trữ cho ATLAS-26. Minh Phúc là đầu mối kỹ thuật bên Bắc Sao Tech; Vũ Anh là đầu mối mua sắm bên Minh An Supply.\nThanh toán đợt một 50% sau giao thiết bị tương ứng 360 triệu chưa VAT. Đợt hai 50% sau nghiệm thu hoàn tất tương ứng 360 triệu chưa VAT. VAT giả định trong bộ dữ liệu là 10%, nên mỗi đợt phải chi 396 triệu nếu đủ hồ sơ. VAT này là giả định dữ liệu, không phải hướng dẫn thuế thực tế.\nThiết bị giao tới kho WH-HCM-01 ngày 28/08/2026. Hóa đơn đợt một là INV-BS-041, phiếu chi là PAY-041. Đợt hai dùng INV-BS-042; biên bản ACC-BS-08 ngày 20/09 mới nghiệm thu có điều kiện vì kiểm thử failover chưa đạt. Hợp đồng không cho phép trả đợt hai chỉ dựa trên việc đã giao thiết bị. Không có điều khoản tỷ lệ phạt trong bộ hồ sơ cung cấp.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "f1044718-2e98-4c47-8a31-cba4e2a6d0cb",
+            "title": "FIN-POL-01 | Phê duyệt ngân sách và thanh toán",
+            "content": "# FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nQuy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\nThanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\nMột biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "57286776-7993-433b-bfb2-e40ca49a170b",
+            "title": "STEER-09 | Ban chỉ đạo ngày 22/09",
+            "content": "# STEER-09 | Ban chỉ đạo ngày 22/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\nQuyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\nMai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "85cbc07b-e5f3-43b4-9244-880ac189cf44",
+            "title": "FIN-FORECAST-09 | Dự báo chi phí ngày 25/09",
+            "content": "# FIN-FORECAST-09 | Dự báo chi phí ngày 25/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nFIN-FORECAST-09 do Trần Mai ký ngày 25/09/2026 ghi tổng ngân sách Atlas hiện hành 2.580 triệu đồng chưa VAT: nội bộ 700, Kết Nối Số 520, Vân Hải Cloud 480, Bắc Sao Tech 720, bảo mật 160. Báo cáo đã gồm CR-07; cộng thêm 180 vào 2.580 là đếm trùng.\nNgân sách Lantern riêng là 900 triệu chưa VAT theo PRJ-LN-02. Tổng ngân sách được duyệt cho hai dự án Atlas và Lantern là 3.480 triệu chưa VAT. Đây là tổng ngân sách, không phải số thực chi và không phải doanh thu công ty. Phân bổ đám mây hai dự án cộng lại là 780 triệu chưa VAT, gồm Atlas 480 và Lantern 300.\nTrong hồ sơ chi tiết thiết bị, PAY-041 xác nhận đã trả 396 triệu có VAT giả định; INV-BS-042 còn 396 triệu có VAT chưa trả. Chưa có đủ chứng từ thực chi cho toàn bộ năm khoản Atlas nên không tính được tỷ lệ giải ngân toàn dự án. Báo cáo chưa chứa doanh thu, lợi nhuận hoặc lương từng nhân viên.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "7abdea03-3db0-44c9-b2bc-77eb9047d672",
+            "title": "ACC-BS-08 | Nghiệm thu thiết bị có điều kiện",
+            "content": "# ACC-BS-08 | Nghiệm thu thiết bị có điều kiện\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nACC-BS-08 lập ngày 20/09/2026 bởi Đỗ Thảo, Lê Quang và Minh Phúc cho NCC-BS-09. Hai máy chủ đạt kiểm thử tải; bộ lưu trữ chưa đạt tình huống chuyển sang nút dự phòng trong 60 giây. Mã lỗi BUG-17, mức S1, làm kiểm thử failover kéo dài 145 giây.\nBiên bản có trạng thái nghiệm thu có điều kiện, chưa phải nghiệm thu hoàn tất. Minh Phúc chịu trách nhiệm bản firmware sửa lỗi; hạn gửi bản sửa là 27/09/2026. Lê Quang duyệt kịch bản kiểm thử lại, Đỗ Thảo chủ trì buổi thử vào 28/09/2026. Tại ngày chốt 25/09 chưa có kết quả buổi thử này.\nĐiều kiện để thanh toán INV-BS-042 là có biên bản bổ sung xác nhận BUG-17 đã khắc phục và failover không quá 60 giây. Điều kiện đưa Atlas vào vận hành còn cần UAT-AT-06 và SEC-CTRL-04; đạt nghiệm thu thiết bị đơn lẻ chưa đủ. Không được dùng việc kho nhận thiết bị ngày 28/08 làm bằng chứng đạt failover.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "0393ed03-9935-4794-9510-c33c4b8b2f91",
+            "title": "FIN-BUD-03 | Ngân sách cơ sở Atlas",
+            "content": "# FIN-BUD-03 | Ngân sách cơ sở Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNgân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\nTất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\nCR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "4fbcd825-c038-41e4-bf69-0a29428d1672",
+            "title": "MA-HR-02 | Danh bạ và trách nhiệm",
+            "content": "# MA-HR-02 | Danh bạ và trách nhiệm\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\nPhạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\nTrần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "a91e0e87-856d-45c4-9455-71afb6917140",
+            "title": "CR-07 | Thay đổi được duyệt ngày 18/09",
+            "content": "# CR-07 | Thay đổi được duyệt ngày 18/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\nNgân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\nMốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "aa949997-6715-430a-a4fd-d546cbdac6d5",
+            "title": "PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern",
+            "content": "# PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nLANTERN-26, tên gọi Lantern, là cổng khách hàng của Minh An Supply do Mai Vy quản lý, ngân sách riêng 900 triệu đồng chưa VAT. Cơ cấu Lantern: giao diện và dịch vụ 500 triệu, phân bổ đám mây 300 triệu, đào tạo khách hàng 100 triệu. Ngân sách này không nằm trong 2.580 triệu của Atlas.\nLantern dùng ID-GATE để đăng nhập và nhận trạng thái đơn từ ORD-HUB. Khách hàng thử nghiệm đầu tiên là An Phú Retail, người nghiệm thu khách hàng là Hà Chi. Bản giao tiếp yêu cầu API 1.3 với customer_order_ref, nên Lantern phụ thuộc bản tích hợp của Kết Nối Số trong NCC-KNS-05.\nMốc chạy thử khách hàng của Lantern là 24/10/2026, có điều kiện Atlas đã vận hành ổn định từ 21/10 và đã đóng kiểm soát SEC-CTRL-04. Mốc 24/10 là chạy thử Lantern, không phải ngày vận hành Atlas. CR-07 không tăng ngân sách Lantern. Nếu BUG-17 chưa đóng làm Atlas bị giữ cổng nghiệm thu, Mai Vy phải đánh giá lại lịch chạy thử; tại ngày chốt chưa có quyết định đổi 24/10.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "24f63a94-2848-41b6-b76e-07f78c8e7fa7",
+            "title": "SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE",
+            "content": "# SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nSEC-CTRL-04 được Bùi Khánh lập ngày 13/09/2026 sau INC-0912. Lê Quang triển khai TTL bộ đệm token 10 phút; token truy cập vẫn hết hạn sau 15 phút theo SPEC-API-04. Hai thời hạn có mục đích khác nhau và không được hoán đổi khi trả lời.\nKiểm thử thu hồi refresh token do Bùi Khánh xác nhận; chạy hồi quy Atlas do Phạm Huy theo dõi; chạy hồi quy Lantern do Mai Vy theo dõi. Hạn đóng kiểm soát là 29/09/2026. Tại bản cập nhật 25/09, TTL 10 phút đã triển khai staging, nhưng kiểm thử thu hồi refresh token còn chờ bằng chứng. Trạng thái tổng là đang mở.\nChi phí kiểm thử dùng khoản bảo mật 160 triệu trong FIN-BUD-03, không có phần tăng ngân sách riêng. STEER-09 yêu cầu đóng SEC-CTRL-04 trước vận hành Atlas và trước chạy thử Lantern. Việc đã rollback INC-0912 không đồng nghĩa toàn bộ hành động phòng ngừa đã hoàn thành.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          }
+        ],
+        "thought_process": [
+          "Mô hình sử dụng: Google Gemini · gemini-2.5-flash.",
+          "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+          "Đã hợp nhất thứ hạng vector và văn bản.",
+          "Đã chọn 12 tài liệu gốc, mở rộng tham chiếu tối đa hai bước.",
+          "Tổng hợp câu trả lời với trích dẫn từng nhận định.",
+          "Provider đang giới hạn tần suất hoặc quota (429). Chưa xác nhận được bản tổng hợp; chuyển sang trích nguyên văn bằng chứng."
+        ],
+        "conversation_id": "0d7e5ebd-a234-47b7-9fa2-0228fbd7ceab",
+        "model_used": {
+          "id": "gemini::gemini-2.5-flash",
+          "provider": "gemini",
+          "model": "gemini-2.5-flash",
+          "label": "Google Gemini",
+          "mode": "api",
+          "configured": true
+        },
+        "answer_mode": "extractive",
+        "failure_reason": "Provider đang giới hạn tần suất hoặc quota (429)."
+      }
+    },
+    {
+      "case": "T03",
+      "profile": "groq::openai/gpt-oss-120b",
+      "status": 200,
+      "seconds": 7.23,
+      "response": {
+        "query": "Ngân sách Atlas tăng bao nhiêu, chia cho nhà cung cấp nào, và ai phê duyệt cuối?",
+        "answer": "Tôi chưa xác nhận được bản tổng hợp. Các đoạn bằng chứng gốc liên quan:\n\n**[1] PRJ-AT-01 | Điều lệ dự án Atlas**\n\n> # PRJ-AT-01 | Điều lệ dự án Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> ATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\n> Điều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\n> Đầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n\n**[2] FIN-BUD-03 | Ngân sách cơ sở Atlas**\n\n> # FIN-BUD-03 | Ngân sách cơ sở Atlas\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Ngân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\n> Tất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\n> CR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n\n**[3] NCC-VH-06 | Hạ tầng Vân Hải Cloud**\n\n> # NCC-VH-06 | Hạ tầng Vân Hải Cloud\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Vân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\n> CR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\n> Lantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n\n**[4] CR-07 | Thay đổi được duyệt ngày 18/09**\n\n> # CR-07 | Thay đổi được duyệt ngày 18/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> CR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\n> Ngân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\n> Mốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n\n**[5] FIN-POL-01 | Phê duyệt ngân sách và thanh toán**\n\n> # FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Quy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\n> Thanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\n> Một biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n\n**[6] MA-HR-02 | Danh bạ và trách nhiệm**\n\n> # MA-HR-02 | Danh bạ và trách nhiệm\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Nguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\n> Phạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\n> Trần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n\n**[7] STEER-09 | Ban chỉ đạo ngày 22/09**\n\n> # STEER-09 | Ban chỉ đạo ngày 22/09\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Cuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\n> Quyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\n> Mai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n\n**[8] NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số**\n\n> # NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n> \n> BỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\n> Ngày chốt thông tin: 25/09/2026.\n> \n> Kết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\n> Phụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\n> Hoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.",
+        "sources": [
+          {
+            "document_id": "f1b2b751-887f-4264-a8c9-95aba16d9938",
+            "title": "PRJ-AT-01 | Điều lệ dự án Atlas",
+            "content": "# PRJ-AT-01 | Điều lệ dự án Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nATLAS-26, tên gọi Atlas, là dự án điều phối đơn hàng của Minh An Supply. Nguyễn Linh bảo trợ; Phạm Huy quản lý; Lê Quang phụ trách kiến trúc. Atlas đồng bộ đơn hàng từ An Phú Retail vào ORD-HUB, phân tuyến sang WH-HCM-01 và WH-BD-02 rồi cung cấp sự kiện trạng thái cho Lantern.\nĐiều lệ ký ngày 01/07/2026 ghi ngân sách cơ sở 2.400 triệu đồng chưa VAT. Mốc UAT ban đầu là 30/09/2026; mốc đưa vào vận hành ban đầu là 15/10/2026. Đây là kế hoạch gốc, không phải mốc cập nhật cuối cùng. Lịch hiện hành được sửa bằng CR-07 và biên bản STEER-09 ngày 22/09/2026.\nĐầu ra gồm định tuyến đơn hàng, đồng bộ tồn kho, báo cáo đối soát và kiểm thử dự phòng. UAT cần tỷ lệ kịch bản đạt ít nhất 98% và không còn lỗi nghiêm trọng mức S1. Quyền quyết định vận hành thuộc Ban chỉ đạo, không thuộc nhà cung cấp thiết bị. Chi phí và cơ cấu ngân sách được phân tách tại FIN-BUD-03.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "0393ed03-9935-4794-9510-c33c4b8b2f91",
+            "title": "FIN-BUD-03 | Ngân sách cơ sở Atlas",
+            "content": "# FIN-BUD-03 | Ngân sách cơ sở Atlas\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNgân sách cơ sở ATLAS-26 ngày 01/07/2026 là 2.400 triệu đồng chưa VAT. Cơ cấu: nhân công nội bộ 700 triệu; dịch vụ tích hợp của Kết Nối Số theo NCC-KNS-05 là 400 triệu; hạ tầng đám mây Vân Hải Cloud theo NCC-VH-06 là 420 triệu; thiết bị Bắc Sao Tech theo NCC-BS-09 là 720 triệu; kiểm thử an toàn thông tin theo SEC-SOW-02 là 160 triệu. Tổng năm khoản bằng 2.400 triệu đồng.\nTất cả số tiền ngân sách trong hồ sơ là giá chưa VAT trừ khi ghi rõ khác. Tiền đã chi không đồng nghĩa với ngân sách được duyệt hay tổng giá trị hợp đồng. Dự phòng không có một khoản bổ sung độc lập ngoài năm khoản trên.\nCR-07 được phê duyệt ngày 18/09/2026 bổ sung 180 triệu đồng: 120 triệu cho tích hợp và 60 triệu cho đám mây. FIN-BUD-03 giữ nguyên để đối chiếu kế hoạch gốc; mức ngân sách hiện hành phải lấy từ CR-07 và FIN-FORECAST-09. Không cộng phần bổ sung thêm lần nữa vào báo cáo đã ghi 2.580 triệu.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "cd364f50-70cf-4b07-ae52-23140862deb8",
+            "title": "NCC-VH-06 | Hạ tầng Vân Hải Cloud",
+            "content": "# NCC-VH-06 | Hạ tầng Vân Hải Cloud\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nVân Hải Cloud cung cấp môi trường chạy ORD-HUB và ID-GATE cho Minh An Supply theo NCC-VH-06. Giá trị phân bổ gốc cho ATLAS-26 là 420 triệu đồng chưa VAT. Đầu mối vận hành bên Vân Hải Cloud là Lâm An, phối hợp với Lê Quang.\nCR-07 bổ sung 60 triệu đồng, đưa cam kết đám mây của Atlas lên 480 triệu đồng chưa VAT. Phần tăng dành cho hàng đợi sự kiện ORD-HUB và vùng dự phòng. Không tăng tiền cho thiết bị Bắc Sao Tech và không chuyển khoản tăng này sang ngân sách Lantern.\nLantern đọc trạng thái đơn từ ORD-HUB nhưng dự án LANTERN-26 có phân bổ riêng 300 triệu đồng, đã nằm trong ngân sách Lantern 900 triệu tại PRJ-LN-02. Khi hỏi tổng hai dự án, phải tránh cộng lại 300 triệu vào Atlas hoặc nhầm toàn bộ chi phí đám mây là dùng chung một ngân sách. Hồ sơ chưa có hóa đơn tháng 10 hoặc số chi phí thực tế tháng 10 của Vân Hải Cloud.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "a91e0e87-856d-45c4-9455-71afb6917140",
+            "title": "CR-07 | Thay đổi được duyệt ngày 18/09",
+            "content": "# CR-07 | Thay đổi được duyệt ngày 18/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCR-07 do Phạm Huy lập ngày 16/09/2026, Trần Mai xác nhận nguồn tiền và Nguyễn Linh ký duyệt ngày 18/09/2026. Thay đổi áp dụng cho ATLAS-26 để hỗ trợ trường customer_order_ref trong giao tiếp với An Phú Retail và thêm dung lượng xử lý sự kiện cho ORD-HUB.\nNgân sách tăng 180 triệu đồng chưa VAT, gồm 120 triệu bổ sung hợp đồng NCC-KNS-05 và 60 triệu bổ sung NCC-VH-06. Ngân sách dự án sau thay đổi là 2.580 triệu đồng chưa VAT. Các khoản Bắc Sao Tech 720 triệu, nhân công nội bộ 700 triệu và kiểm thử bảo mật 160 triệu không đổi.\nMốc UAT chuyển từ 30/09 sang 06/10/2026. Mốc đưa Atlas vào vận hành chuyển từ 15/10 sang 21/10/2026. Dời lịch không phải do sự cố ID-GATE đơn lẻ: thay đổi yêu cầu khách hàng và công việc tích hợp là nguyên nhân được ghi trong quyết định. STEER-09 xác nhận lịch này còn hiệu lực. CR-07 không đổi SLA giao hàng của khách hàng và không phê duyệt đưa Lantern vào vận hành.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "f1044718-2e98-4c47-8a31-cba4e2a6d0cb",
+            "title": "FIN-POL-01 | Phê duyệt ngân sách và thanh toán",
+            "content": "# FIN-POL-01 | Phê duyệt ngân sách và thanh toán\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nQuy trình nội bộ Minh An Supply, hiệu lực 01/07/2026: thay đổi ngân sách dự án đến 100 triệu đồng cần Trần Mai và Lê Quang đồng phê duyệt; thay đổi trên 100 triệu cần Trần Mai xác nhận nguồn tiền và Nguyễn Linh phê duyệt cuối. Quản lý dự án chuẩn bị hồ sơ và không tự duyệt đề nghị của mình. Vì CR-07 tăng 180 triệu nên thuộc thẩm quyền Nguyễn Linh.\nThanh toán cho nhà cung cấp cần đủ hợp đồng, hóa đơn hợp lệ và biên bản nghiệm thu đúng mốc. Vũ Anh kiểm tra hồ sơ mua sắm; người phụ trách nghiệp vụ ký nghiệm thu; Trần Mai phê duyệt chi tiền. Lỗi S1 hoặc điều kiện nghiệm thu chưa hoàn thành làm tạm giữ khoản thanh toán gắn với mốc đó, không làm hủy toàn bộ hợp đồng.\nMột biên bản nghiệm thu có điều kiện không được coi là nghiệm thu hoàn tất. Giữ tiền theo điều kiện hợp đồng cũng không tự động áp dụng phạt. Tỷ lệ phạt chỉ được xác định nếu có điều khoản và hồ sơ riêng. Bộ hồ sơ này không cung cấp tỷ lệ phạt cho NCC-BS-09.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "4fbcd825-c038-41e4-bf69-0a29428d1672",
+            "title": "MA-HR-02 | Danh bạ và trách nhiệm",
+            "content": "# MA-HR-02 | Danh bạ và trách nhiệm\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nNguyễn Linh, EMP-001, Tổng giám đốc Minh An Supply, phê duyệt tăng ngân sách trên 100 triệu đồng theo FIN-POL-01. Trần Mai, EMP-002, Giám đốc tài chính, kiểm tra nguồn tiền và phê duyệt thanh toán sau khi đủ hồ sơ. Lê Quang, EMP-003, Giám đốc công nghệ, chịu trách nhiệm kiến trúc ATLAS-26 và dịch vụ ID-GATE.\nPhạm Huy, EMP-004, là quản lý dự án ATLAS-26, tổng hợp tiến độ và gửi thay đổi CR-07. Vũ Anh, EMP-005, phụ trách mua sắm, quản lý hợp đồng NCC-BS-09 với Bắc Sao Tech. Đỗ Thảo, EMP-006, trưởng vận hành kho WH-HCM-01 và chủ trì nghiệm thu nghiệp vụ UAT-AT-06. Bùi Khánh, EMP-007, phụ trách an toàn thông tin và kiểm soát SEC-CTRL-04. Mai Vy, EMP-008, quản lý LANTERN-26 và đầu mối khách hàng An Phú Retail.\nTrần Mai không quản lý kỹ thuật ID-GATE; Lê Quang không có quyền tự phê duyệt khoản tăng ngân sách CR-07. Huy nhận việc từ Quang nhưng vẫn phải có chữ ký Nguyễn Linh cho thay đổi ngân sách. Minh Phúc là đầu mối kỹ thuật của Bắc Sao Tech, không phải nhân viên Minh An Supply.\n",
+            "source_type": "document",
+            "retrieval_method": "hybrid"
+          },
+          {
+            "document_id": "57286776-7993-433b-bfb2-e40ca49a170b",
+            "title": "STEER-09 | Ban chỉ đạo ngày 22/09",
+            "content": "# STEER-09 | Ban chỉ đạo ngày 22/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nCuộc họp STEER-09 ngày 22/09/2026 do Nguyễn Linh chủ trì, có Trần Mai, Lê Quang, Phạm Huy, Đỗ Thảo, Vũ Anh, Bùi Khánh và Mai Vy. Ban chỉ đạo xác nhận CR-07 còn hiệu lực: ngân sách Atlas 2.580 triệu chưa VAT, UAT 06/10 và vận hành dự kiến 21/10.\nQuyết định 1: giữ thanh toán INV-BS-042 cho đến khi ACC-BS-08 có xác nhận đóng BUG-17; Vũ Anh làm đầu mối và Minh Phúc giao bản sửa. Quyết định 2: Hoàng Nam giao API 1.3 trước 29/09 theo PL-KNS-01. Quyết định 3: Bùi Khánh đóng SEC-CTRL-04 trước 29/09, phối hợp Lê Quang lấy bằng chứng.\nMai Vy giữ kế hoạch chạy thử Lantern 24/10, nhưng phải báo cáo lại nếu cổng UAT Atlas không đạt. Trần Mai không đồng ý sử dụng tiền đã thanh toán đợt một thiết bị làm bằng chứng đủ điều kiện chi đợt hai. Cuộc họp chưa phê duyệt phạt Bắc Sao Tech và chưa cho phép vận hành sớm Atlas.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "8bcf00af-7c2e-4d66-8859-0507f10623f7",
+            "title": "NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số",
+            "content": "# NCC-KNS-05 | Dịch vụ tích hợp Kết Nối Số\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nKết Nối Số là nhà cung cấp dịch vụ tích hợp API cho ATLAS-26, theo NCC-KNS-05 ký ngày 10/07/2026. Giá trị gốc 400 triệu đồng chưa VAT. Đầu mối bên Kết Nối Số là Hoàng Nam; đầu mối bên Minh An Supply là Phạm Huy.\nPhụ lục PL-KNS-01 ký ngày 19/09 căn cứ CR-07 bổ sung 120 triệu đồng cho ánh xạ customer_order_ref và chống ghi nhận đơn hàng trùng. Tổng cam kết hợp đồng sau phụ lục là 520 triệu đồng chưa VAT; đây không phải tiền đã thanh toán. Nhân công nội bộ 700 triệu ở FIN-BUD-03 không thuộc hợp đồng Kết Nối Số.\nHoàng Nam phải giao bản tích hợp API 1.3 trước 29/09/2026. Bản giao cần phù hợp SPEC-API-04, xử lý ACK-409 và giữ đúng quy tắc idempotency_key. Phạm Huy theo dõi giao hàng; Lê Quang duyệt kỹ thuật. Thay đổi trường của khách hàng An Phú Retail trong KH-AP-2026 là lý do trực tiếp của phụ lục. Bộ hồ sơ chưa có chứng từ trả tiền cho phụ lục này.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "e4961927-c5a2-4030-ae54-20385e74be44",
+            "title": "MA-ORG-01 | Tổng quan Minh An Supply",
+            "content": "# MA-ORG-01 | Tổng quan Minh An Supply\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nMinh An Supply là doanh nghiệp hư cấu trong bộ dữ liệu thử nghiệm Nori, cung cấp dịch vụ kho vận và phần mềm điều phối đơn hàng cho khách hàng bán lẻ. Công ty có văn phòng tại TP.HCM và hai kho mang mã WH-HCM-01 và WH-BD-02. Dữ liệu chốt đến hết ngày 25/09/2026; mọi con người, đối tác và giao dịch trong bộ hồ sơ đều giả lập.\nNguyễn Linh là Tổng giám đốc, Trần Mai là Giám đốc tài chính, Lê Quang là Giám đốc công nghệ. Dự án ATLAS-26 thay thế công cụ điều phối đơn hàng cũ. Dự án LANTERN-26 xây cổng theo dõi giao hàng cho khách hàng. Hai dự án dùng chung dịch vụ danh tính ID-GATE và cụm dữ liệu ORD-HUB, nhưng có ngân sách và quản lý dự án riêng.\nKhách hàng An Phú Retail dùng cả hai kho. Hợp đồng KH-AP-2026 quy định dịch vụ cho khách hàng này. Sơ đồ trách nhiệm chi tiết nằm ở MA-HR-02; ngân sách Atlas nằm ở FIN-BUD-03. Không suy diễn rằng Minh An Supply có quan hệ với một doanh nghiệp có tên giống trong thực tế.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "24f63a94-2848-41b6-b76e-07f78c8e7fa7",
+            "title": "SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE",
+            "content": "# SEC-CTRL-04 | Kiểm soát bảo mật ID-GATE\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nSEC-CTRL-04 được Bùi Khánh lập ngày 13/09/2026 sau INC-0912. Lê Quang triển khai TTL bộ đệm token 10 phút; token truy cập vẫn hết hạn sau 15 phút theo SPEC-API-04. Hai thời hạn có mục đích khác nhau và không được hoán đổi khi trả lời.\nKiểm thử thu hồi refresh token do Bùi Khánh xác nhận; chạy hồi quy Atlas do Phạm Huy theo dõi; chạy hồi quy Lantern do Mai Vy theo dõi. Hạn đóng kiểm soát là 29/09/2026. Tại bản cập nhật 25/09, TTL 10 phút đã triển khai staging, nhưng kiểm thử thu hồi refresh token còn chờ bằng chứng. Trạng thái tổng là đang mở.\nChi phí kiểm thử dùng khoản bảo mật 160 triệu trong FIN-BUD-03, không có phần tăng ngân sách riêng. STEER-09 yêu cầu đóng SEC-CTRL-04 trước vận hành Atlas và trước chạy thử Lantern. Việc đã rollback INC-0912 không đồng nghĩa toàn bộ hành động phòng ngừa đã hoàn thành.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "85cbc07b-e5f3-43b4-9244-880ac189cf44",
+            "title": "FIN-FORECAST-09 | Dự báo chi phí ngày 25/09",
+            "content": "# FIN-FORECAST-09 | Dự báo chi phí ngày 25/09\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nFIN-FORECAST-09 do Trần Mai ký ngày 25/09/2026 ghi tổng ngân sách Atlas hiện hành 2.580 triệu đồng chưa VAT: nội bộ 700, Kết Nối Số 520, Vân Hải Cloud 480, Bắc Sao Tech 720, bảo mật 160. Báo cáo đã gồm CR-07; cộng thêm 180 vào 2.580 là đếm trùng.\nNgân sách Lantern riêng là 900 triệu chưa VAT theo PRJ-LN-02. Tổng ngân sách được duyệt cho hai dự án Atlas và Lantern là 3.480 triệu chưa VAT. Đây là tổng ngân sách, không phải số thực chi và không phải doanh thu công ty. Phân bổ đám mây hai dự án cộng lại là 780 triệu chưa VAT, gồm Atlas 480 và Lantern 300.\nTrong hồ sơ chi tiết thiết bị, PAY-041 xác nhận đã trả 396 triệu có VAT giả định; INV-BS-042 còn 396 triệu có VAT chưa trả. Chưa có đủ chứng từ thực chi cho toàn bộ năm khoản Atlas nên không tính được tỷ lệ giải ngân toàn dự án. Báo cáo chưa chứa doanh thu, lợi nhuận hoặc lương từng nhân viên.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          },
+          {
+            "document_id": "aa949997-6715-430a-a4fd-d546cbdac6d5",
+            "title": "PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern",
+            "content": "# PRJ-LN-02 | Kế hoạch cổng khách hàng Lantern\n\nBỘ DỮ LIỆU GIẢ LẬP — dùng thử RAG, không phải hồ sơ doanh nghiệp thật.\nNgày chốt thông tin: 25/09/2026.\n\nLANTERN-26, tên gọi Lantern, là cổng khách hàng của Minh An Supply do Mai Vy quản lý, ngân sách riêng 900 triệu đồng chưa VAT. Cơ cấu Lantern: giao diện và dịch vụ 500 triệu, phân bổ đám mây 300 triệu, đào tạo khách hàng 100 triệu. Ngân sách này không nằm trong 2.580 triệu của Atlas.\nLantern dùng ID-GATE để đăng nhập và nhận trạng thái đơn từ ORD-HUB. Khách hàng thử nghiệm đầu tiên là An Phú Retail, người nghiệm thu khách hàng là Hà Chi. Bản giao tiếp yêu cầu API 1.3 với customer_order_ref, nên Lantern phụ thuộc bản tích hợp của Kết Nối Số trong NCC-KNS-05.\nMốc chạy thử khách hàng của Lantern là 24/10/2026, có điều kiện Atlas đã vận hành ổn định từ 21/10 và đã đóng kiểm soát SEC-CTRL-04. Mốc 24/10 là chạy thử Lantern, không phải ngày vận hành Atlas. CR-07 không tăng ngân sách Lantern. Nếu BUG-17 chưa đóng làm Atlas bị giữ cổng nghiệm thu, Mai Vy phải đánh giá lại lịch chạy thử; tại ngày chốt chưa có quyết định đổi 24/10.\n",
+            "source_type": "document",
+            "retrieval_method": "reference"
+          }
+        ],
+        "thought_process": [
+          "Mô hình sử dụng: Groq · openai/gpt-oss-120b.",
+          "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+          "Đã hợp nhất thứ hạng vector và văn bản.",
+          "Đã chọn 12 tài liệu gốc, mở rộng tham chiếu tối đa hai bước.",
+          "Tổng hợp câu trả lời với trích dẫn từng nhận định.",
+          "Phát hiện lỗi hoặc trích dẫn không hợp lệ; hiệu chỉnh và kiểm chứng lại.",
+          "Provider đang giới hạn tần suất hoặc quota (429). Chưa nhận được bản sửa; trả bằng chứng gốc."
+        ],
+        "conversation_id": "c171779c-032c-4b16-bc4e-c214e8e4a6f1",
+        "model_used": {
+          "id": "groq::openai/gpt-oss-120b",
+          "provider": "groq",
+          "model": "openai/gpt-oss-120b",
+          "label": "Groq",
+          "mode": "api",
+          "configured": true
+        },
+        "answer_mode": "extractive",
+        "failure_reason": "Provider đang giới hạn tần suất hoặc quota (429)."
+      }
+    },
+    {
+      "case": "T19",
+      "profile": "ollama::qwen2.5:3b",
+      "status": 200,
+      "seconds": 1.17,
+      "response": {
+        "query": "Trong minh_an_demo, FPT đầu tư bao nhiêu để mua GPU NVIDIA?",
+        "answer": "Tôi chưa tìm thấy thông tin phù hợp trong tài liệu của không gian này. Bạn có thể tải thêm tài liệu hoặc đặt câu hỏi cụ thể hơn.",
+        "sources": [],
+        "thought_process": [
+          "Mô hình sử dụng: Ollama Local · qwen2.5:3b.",
+          "Tìm kiếm văn bản và vector trong không gian tài liệu hiện tại.",
+          "Đã hợp nhất thứ hạng vector và văn bản.",
+          "Đã chọn 0 tài liệu gốc, mở rộng tham chiếu tối đa hai bước."
+        ],
+        "conversation_id": "ccb6bcae-6b77-42db-9e23-234ec1e703d4",
+        "model_used": {
+          "id": "ollama::qwen2.5:3b",
+          "provider": "ollama",
+          "model": "qwen2.5:3b",
+          "label": "Ollama Local",
+          "mode": "local",
+          "configured": true
+        },
+        "answer_mode": "no_evidence",
+        "failure_reason": null
+      }
+    }
+  ]
+}

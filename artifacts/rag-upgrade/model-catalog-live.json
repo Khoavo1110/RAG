@@ -1,0 +1,226 @@
+{
+  "profiles": [
+    {
+      "id": "ollama::qwen2.5:3b",
+      "provider": "ollama",
+      "model": "qwen2.5:3b",
+      "label": "Ollama Local",
+      "mode": "local",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "ollama::qwen2.5:3b-hermes",
+      "provider": "ollama",
+      "model": "qwen2.5:3b-hermes",
+      "label": "Ollama Local",
+      "mode": "local",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "ollama::mistral:latest",
+      "provider": "ollama",
+      "model": "mistral:latest",
+      "label": "Ollama Local",
+      "mode": "local",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "ollama::phi3:latest",
+      "provider": "ollama",
+      "model": "phi3:latest",
+      "label": "Ollama Local",
+      "mode": "local",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "gemini::gemini-2.5-flash",
+      "provider": "gemini",
+      "model": "gemini-2.5-flash",
+      "label": "Google Gemini",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "nvidia::nvidia/nemotron-3-ultra-550b-a55b",
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "nvidia::nvidia/nemotron-3.5-lightning-30b-a3b",
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "nvidia::google/gemma-4-31b-it",
+      "provider": "nvidia",
+      "model": "google/gemma-4-31b-it",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "nvidia::minimaxai/minimax-m3",
+      "provider": "nvidia",
+      "model": "minimaxai/minimax-m3",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": false,
+      "status": "unlisted"
+    },
+    {
+      "id": "nvidia::meta/llama-3.2-11b-vision-instruct",
+      "provider": "nvidia",
+      "model": "meta/llama-3.2-11b-vision-instruct",
+      "label": "NVIDIA NIM",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "groq::qwen/qwen3.6-27b",
+      "provider": "groq",
+      "model": "qwen/qwen3.6-27b",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": false,
+      "status": "unlisted"
+    },
+    {
+      "id": "groq::qwen/qwen3.8-27b",
+      "provider": "groq",
+      "model": "qwen/qwen3.8-27b",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "groq::openai/gpt-oss-120b",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "groq::openai/gpt-oss-20b",
+      "provider": "groq",
+      "model": "openai/gpt-oss-20b",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "groq::groq/compound",
+      "provider": "groq",
+      "model": "groq/compound",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": false,
+      "status": "unlisted"
+    },
+    {
+      "id": "groq::groq/compound-mini",
+      "provider": "groq",
+      "model": "groq/compound-mini",
+      "label": "Groq",
+      "mode": "api",
+      "configured": true,
+      "available": false,
+      "status": "unlisted"
+    },
+    {
+      "id": "openrouter::nvidia/nemotron-3-super-120b-a12b:free",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-super-120b-a12b:free",
+      "label": "OpenRouter",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "openrouter::nvidia/nemotron-3.5-lightning:free",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3.5-lightning:free",
+      "label": "OpenRouter",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "openrouter::nvidia/nemotron-3-ultra-550b-a55b:free",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "label": "OpenRouter",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "openrouter::nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "label": "OpenRouter",
+      "mode": "api",
+      "configured": true,
+      "available": true,
+      "status": "listed"
+    },
+    {
+      "id": "openrouter::minimax/minimax-m3:free",
+      "provider": "openrouter",
+      "model": "minimax/minimax-m3:free",
+      "label": "OpenRouter",
+      "mode": "api",
+      "configured": true,
+      "available": false,
+      "status": "unlisted"
+    }
+  ],
+  "local_default_id": "ollama::qwen2.5:3b",
+  "api_default_id": "gemini::gemini-2.5-flash"
+}

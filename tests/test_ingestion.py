@@ -11,7 +11,9 @@ load_dotenv()
 from backend.app.ingestion.database_sync import init_db, SessionLocal, db_sync_manager
 from backend.app.schemas import Document, DocumentChunk
 from backend.app.ingestion.graph_extractor import graph_extractor
+import pytest
 
+@pytest.mark.asyncio
 async def test_pipeline():
     print("1. Initializing database tables...")
     init_db()

@@ -1,0 +1,27 @@
+services:
+  nori-backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres-vector
+      DATABASE_URL: ""
+      NEO4J_URI: bolt://neo4j-graph:7687
+      REDIS_URL: redis://redis-queue:6379/0
+      OLLAMA_BASE_URL: http://host.docker.internal:11434/v1
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - postgres-vector
+      - neo4j-graph
+    restart: unless-stopped
+  nori-frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - nori-backend
+    restart: unless-stopped

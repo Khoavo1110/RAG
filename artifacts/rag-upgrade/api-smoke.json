@@ -1,0 +1,16 @@
+{
+  "health": {
+    "status": "healthy",
+    "services": {
+      "postgres": true,
+      "neo4j": true,
+      "llm": true
+    },
+    "provider": "ollama",
+    "model": "qwen2.5:3b"
+  },
+  "health_status": 200,
+  "demo_documents": 22,
+  "fpt_documents": 1,
+  "disjoint": true
+}

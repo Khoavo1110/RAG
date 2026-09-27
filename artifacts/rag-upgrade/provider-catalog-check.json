@@ -1,0 +1,102 @@
+[
+  {
+    "provider": "gemini",
+    "status": 200,
+    "listed_models": 61,
+    "configured_models": [
+      {
+        "id": "gemini::gemini-2.5-flash",
+        "listed": true
+      }
+    ]
+  },
+  {
+    "provider": "nvidia",
+    "status": 200,
+    "listed_models": 82,
+    "configured_models": [
+      {
+        "id": "nvidia::nvidia/nemotron-3-super-120b-a12b",
+        "listed": true
+      },
+      {
+        "id": "nvidia::nvidia/nemotron-3-ultra-550b-a55b",
+        "listed": true
+      },
+      {
+        "id": "nvidia::nvidia/nemotron-3.5-lightning-30b-a3b",
+        "listed": true
+      },
+      {
+        "id": "nvidia::google/gemma-4-31b-it",
+        "listed": true
+      },
+      {
+        "id": "nvidia::minimaxai/minimax-m3",
+        "listed": false
+      },
+      {
+        "id": "nvidia::meta/llama-3.2-11b-vision-instruct",
+        "listed": true
+      }
+    ]
+  },
+  {
+    "provider": "groq",
+    "status": 200,
+    "listed_models": 11,
+    "configured_models": [
+      {
+        "id": "groq::qwen/qwen3.6-27b",
+        "listed": false
+      },
+      {
+        "id": "groq::qwen/qwen3.8-27b",
+        "listed": true
+      },
+      {
+        "id": "groq::openai/gpt-oss-120b",
+        "listed": true
+      },
+      {
+        "id": "groq::openai/gpt-oss-20b",
+        "listed": true
+      },
+      {
+        "id": "groq::groq/compound",
+        "listed": false
+      },
+      {
+        "id": "groq::groq/compound-mini",
+        "listed": false
+      }
+    ]
+  },
+  {
+    "provider": "openrouter",
+    "status": 200,
+    "listed_models": 458,
+    "configured_models": [
+      {
+        "id": "openrouter::nvidia/nemotron-3-super-120b-a12b:free",
+        "listed": true
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3.5-lightning:free",
+        "listed": true
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3-ultra-550b-a55b:free",
+        "listed": true
+      },
+      {
+        "id": "openrouter::nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "listed": true
+      },
+      {
+        "id": "openrouter::minimax/minimax-m3:free",
+        "listed": false
+      }
+    ]
+  }
+]

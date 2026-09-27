@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/__pycache__
+.venv
+.git
+.env
+.nori-rebuild
+data
+artifacts
+luan_van
+.agents
+.understand-anything

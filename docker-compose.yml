@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/docker_volumes/postgres:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   neo4j-graph:
@@ -17,7 +17,6 @@ services:
     container_name: agentic_rag_neo4j
     environment:
       NEO4J_AUTH: ${NEO4J_USERNAME:-neo4j}/${NEO4J_PASSWORD:-neo4j_password_123}
-      # Cho phép APOC plugin (nếu cần xử lý đồ thị nâng cao sau này)
       NEO4J_apoc_export_file_enabled: "true"
       NEO4J_apoc_import_file_enabled: "true"
       NEO4J_apoc_import_file_use__neo4j__config: "true"
@@ -25,8 +24,8 @@ services:
       - "7474:7474" # HTTP Browser
       - "7687:7687" # Bolt Protocol
     volumes:
-      - ./data/docker_volumes/neo4j/data:/data
-      - ./data/docker_volumes/neo4j/plugins:/plugins
+      - neo4j_data:/data
+      - neo4j_plugins:/plugins
     restart: unless-stopped
 
   redis-queue:
@@ -35,5 +34,12 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./data/docker_volumes/redis:/data
+      - redis_data:/data
     restart: unless-stopped
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  neo4j_plugins:
+  redis_data:
+
